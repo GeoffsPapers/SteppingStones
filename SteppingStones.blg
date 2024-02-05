@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: SteppingStones.aux
+The style file: plain.bst
+Database file #1: Bibliography.bib
+You've used 19 entries,
+            2118 wiz_defined-function locations,
+            645 strings with 7454 characters,
+and the built_in function-call counts, 7316 in all, are:
+= -- 697
+> -- 324
+< -- 19
++ -- 118
+- -- 99
+* -- 512
+:= -- 1167
+add.period$ -- 63
+call.type$ -- 19
+change.case$ -- 92
+chr.to.int$ -- 0
+cite$ -- 19
+duplicate$ -- 313
+empty$ -- 606
+format.name$ -- 99
+if$ -- 1628
+int.to.chr$ -- 0
+int.to.str$ -- 19
+missing$ -- 22
+newline$ -- 98
+num.names$ -- 56
+pop$ -- 98
+preamble$ -- 1
+purify$ -- 76
+quote$ -- 0
+skip$ -- 236
+stack$ -- 0
+substring$ -- 421
+swap$ -- 110
+text.length$ -- 19
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 70
+warning$ -- 0
+while$ -- 71
+width$ -- 21
+write$ -- 223

@@ -1,0 +1,125 @@
+\begin{thebibliography}{10}
+
+\bibitem{AB75}
+A.R. Anderson and N.D. Belnap.
+\newblock {\em {Entailment: The Logic of Relevance and Necessity, Vol. 1}}.
+\newblock Princton University Press, 1975.
+
+\bibitem{Aug17}
+L.~Augusto.
+\newblock {\em {Many-valued Logics: A Mathematical and Computational
+  Introduction}}.
+\newblock College Publications, 2017.
+
+\bibitem{BBW06}
+P.~Blackburn, J.~van Benthem, and F.~Wolther.
+\newblock {\em {Handbook of Modal Logic}}.
+\newblock Number~3 in Studies in Logic and Practical Reasoning. Elsevier
+  Science, 2006.
+
+\bibitem{BP13-TFF1}
+J.~Blanchette and A.~Paskevich.
+\newblock {TFF1: The TPTP Typed First-order Form with Rank-1 Polymorphism}.
+\newblock In M.P. Bonacina, editor, {\em {Proceedings of the 24th International
+  Conference on Automated Deduction}}, number 7898 in Lecture Notes in
+  Artificial Intelligence, pages 414--420. Springer-Verlag, 2013.
+
+\bibitem{KSR16}
+C.~Kaliszyk, G.~Sutcliffe, and F.~Rabe.
+\newblock {TH1: The TPTP Typed Higher-Order Form with Rank-1 Polymorphism}.
+\newblock In P.~Fontaine, S.~Schulz, and J.~Urban, editors, {\em {Proceedings
+  of the 5th Workshop on Practical Aspects of Automated Reasoning}}, number
+  1635 in CEUR Workshop Proceedings, pages 41--55, 2016.
+
+\bibitem{Kri63}
+S.~Kripke.
+\newblock {Semantical Considerations on Modal Logic}.
+\newblock {\em Acta Philosophica Fennica}, 16:83--94, 1963.
+
+\bibitem{Pri02}
+G.~Priest.
+\newblock {Paraconsistent Logic}.
+\newblock In D.~Gabbay and F.~Guenthner, editors, {\em {Handbook of
+  Philosophical Logic}}, volume~6, pages 287--393. Springer-Verlag, 2002.
+
+\bibitem{SF+22}
+A.~Steen, D.~Fuenmayor, T.~Glei{\ss}ner, G.~Sutcliffe, and C.~Benzm{\"u}ller.
+\newblock {Automated Reasoning in Non-classical Logics in the TPTP World}.
+\newblock In B.~Konev, C.~Schon, and A.~Steen, editors, {\em {Proceedings of
+  the 8th Workshop on Practical Aspects of Automated Reasoning}}, number 3201
+  in CEUR Workshop Proceedings, page Online, 2022.
+
+\bibitem{Sut08-KEAPPA}
+G.~Sutcliffe.
+\newblock {The SZS Ontologies for Automated Reasoning Software}.
+\newblock In G.~Sutcliffe, P.~Rudnicki, R.~Schmidt, B.~Konev, and S.~Schulz,
+  editors, {\em {Proceedings of the LPAR Workshops: Knowledge Exchange:
+  Automated Provers and Proof Assistants, and the 7th International Workshop on
+  the Implementation of Logics}}, number 418 in CEUR Workshop Proceedings,
+  pages 38--49, 2008.
+
+\bibitem{Sut09}
+G.~Sutcliffe.
+\newblock {The TPTP Problem Library and Associated Infrastructure. The FOF and
+  CNF Parts, v3.5.0}.
+\newblock {\em Journal of Automated Reasoning}, 43(4):337--362, 2009.
+
+\bibitem{Sut10}
+G.~Sutcliffe.
+\newblock {The TPTP World - Infrastructure for Automated Reasoning}.
+\newblock In E.~Clarke and A.~Voronkov, editors, {\em {Proceedings of the 16th
+  International Conference on Logic for Programming, Artificial Intelligence,
+  and Reasoning}}, number 6355 in Lecture Notes in Artificial Intelligence,
+  pages 1--12. Springer-Verlag, 2010.
+
+\bibitem{Sut16}
+G.~Sutcliffe.
+\newblock {The CADE ATP System Competition - CASC}.
+\newblock {\em AI Magazine}, 37(2):99--101, 2016.
+
+\bibitem{Sut17}
+G.~Sutcliffe.
+\newblock {The TPTP Problem Library and Associated Infrastructure. From CNF to
+  TH0, TPTP v6.4.0}.
+\newblock {\em Journal of Automated Reasoning}, 59(4):483--502, 2017.
+
+\bibitem{Sut23-IGPL}
+G.~Sutcliffe.
+\newblock {The Logic Languages of the TPTP World}.
+\newblock {\em Logic Journal of the IGPL}, 31(6):1153--1169, 2023.
+
+\bibitem{SB10}
+G.~Sutcliffe and C.~Benzm{\"u}ller.
+\newblock {Automated Reasoning in Higher-Order Logic using the TPTP THF
+  Infrastructure}.
+\newblock {\em Journal of Formalized Reasoning}, 3(1):1--27, 2010.
+
+\bibitem{SK18}
+G.~Sutcliffe and E.~Kotelnikov.
+\newblock {TFX: The TPTP Extended Typed First-order Form}.
+\newblock In B.~Konev, J.~Urban, and S.~Schulz, editors, {\em {Proceedings of
+  the 6th Workshop on Practical Aspects of Automated Reasoning}}, number 2162
+  in CEUR Workshop Proceedings, pages 72--87, 2018.
+
+\bibitem{SS+12}
+G.~Sutcliffe, S.~Schulz, K.~Claessen, and P.~Baumgartner.
+\newblock {The TPTP Typed First-order Form with Arithmetic}.
+\newblock In N.~Bj{\o}rner and A.~Voronkov, editors, {\em {Proceedings of the
+  18th International Conference on Logic for Programming, Artificial
+  Intelligence, and Reasoning}}, number 7180 in Lecture Notes in Artificial
+  Intelligence, pages 406--419. Springer-Verlag, 2012.
+
+\bibitem{SS+06}
+G.~Sutcliffe, S.~Schulz, K.~Claessen, and A.~Van~Gelder.
+\newblock {Using the TPTP Language for Writing Derivations and Finite
+  Interpretations}.
+\newblock In U.~Furbach and N.~Shankar, editors, {\em {Proceedings of the 3rd
+  International Joint Conference on Automated Reasoning}}, number 4130 in
+  Lecture Notes in Artificial Intelligence, pages 67--81. Springer, 2006.
+
+\bibitem{SS98-JAR}
+G.~Sutcliffe and C.B. Suttner.
+\newblock {The TPTP Problem Library: CNF Release v1.2.1}.
+\newblock {\em Journal of Automated Reasoning}, 21(2):177--203, 1998.
+
+\end{thebibliography}
