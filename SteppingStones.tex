@@ -52,28 +52,45 @@
 The first release of the TPTP problem library was made on Friday 12th November 1993. 
 Since then the TPTP World (once gently referred to as the ``TPTP Jungle'') has evolved into a 
 well established infrastructure that supports research, development, and deployment of ATP systems.
-There have been some key developments that helped make the TPTP a success: the CADE ATP System 
-Competition (CASC) that was conceived after CADE-12 in Nancy in 1994, the problem difficulty 
-ratings that were added in 1997, the SZS ontologies that were released in 2004, the addition of 
-Specialist Problem Classes (SPCs) in 2010, and the StarExec service that started in 2013. 
-This talk reviews these and other stepping stones in the development of the TPTP World.
+There have been some key developments that helped make the TPTP World a success: 
+the first TPTP problem library that was first released in 1993, 
+the CADE ATP System Competition (CASC) that was conceived after CADE-12 in Nancy in 1994, 
+the problem difficulty ratings that were added in 1997, 
+the current TPTP language that was adopted in 2003, 
+the SZS ontologies that were specified in 2004, 
+the TSTP solution library that was built starting around 2005, 
+the Specialist Problem Classes (SPCs) used to classify problems from 2010, 
+the SystemOnTPTP service that was offered from 2011, 
+and 
+the StarExec service that started in 2013. 
+This talk reviews these stepping stones in the development of the TPTP World.
 \end{abstract}
 %--------------------------------------------------------------------------------------------------
 \section{Introduction}
 \label{Introduction}
 
-The TPTP World \cite{Sut17} is a well established infrastructure that supports research, 
+The TPTP World \cite{Sut10,Sut17} is a well established infrastructure that supports research, 
 development, and deployment of ATP systems.
-The TPTP World includes the TPTP problem library
-\cite{Sut09}, 
-the TSTP solution library
-\cite{Sut10}, 
-standards for writing ATP problems and reporting ATP solutions
-\cite{SS+06,Sut08-KEAPPA}, 
-tools and services for processing ATP problems and solutions
-\cite{Sut10}, 
-and it supports the CADE ATP System Competition (CASC)
-\cite{Sut16}.
+Salient components of the TPTP World are
+the TPTP problem library \cite{Sut09}, 
+the TSTP solution library \cite{Sut10}, 
+the TPTP languages \cite{SS+06}, 
+the SZS ontologies \cite{Sut08-KEAPPA},
+the Specialist Problem Classes (SPCs) and problem difficulty ratings \cite{SS01},
+and the CADE ATP System Competition (CASC) \cite{Sut16}.
+StarExec \cite{SST14} and SystemOnTPTP \cite{Sut00-CADE-17} provide computational support for
+the TPTP World.
+There are dependencies between these parts of the TPTP World, as shown in 
+Figure~\ref{Dependencies}, forming a series of "stepping stones" from key starting points
+through to happy users.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{Dependencies.pdf}
+\caption{Dependencies between the Stepping Stones}
+\label{Dependencies}
+\end{figure}
+
 Various parts of the TPTP World have been deployed in a range of applications,
 in both academia and industry.
 Since the first release of the TPTP problem library in 1993, many researchers have used the 
@@ -85,7 +102,7 @@ The web page {\smalltt{\url{https://www.tptp.org}}} provides access to all compo
 \paragraph{This paper is organized as follows:}
 
 %--------------------------------------------------------------------------------------------------
-\section{The TPTP World and Languages}
+\section{The TPTP Languages}
 \label{TPTP}
 
 The TPTP language \cite{Sut23-IGPL} is one of the keys to the success of the TPTP World.
