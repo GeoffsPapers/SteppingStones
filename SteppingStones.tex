@@ -82,7 +82,11 @@ StarExec \cite{SST14} and SystemOnTPTP \cite{Sut00-CADE-17} provide computationa
 the TPTP World.
 There are dependencies between these parts of the TPTP World, as shown in 
 Figure~\ref{Dependencies}, forming a series of "stepping stones" from key starting points
-through to happy users.
+through to happy users, who contribute to TPTP problem library.
+There is another cycle of dependencies: from the TPTP problem library, to the TSTP solution 
+library, to the problem difficulty ratings, and back to the TPTP problem library.
+This cycle means that building these components, releases of the TPTP problem library in
+particular, requires iteration until stability is reached.
 
 \begin{figure}[htbp]
 \centering
@@ -91,8 +95,8 @@ through to happy users.
 \label{Dependencies}
 \end{figure}
 
-Various parts of the TPTP World have been deployed in a range of applications,
-in both academia and industry.
+Various parts of the TPTP World have been deployed in a range of applications, in both academia 
+and industry.
 Since the first release of the TPTP problem library in 1993, many researchers have used the 
 TPTP World as an appropriate and convenient basis for ATP system research and development. 
 Over the years the TPTP World has provided a platform upon which ATP users have presented their 
