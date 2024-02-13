@@ -155,7 +155,7 @@ $\forall$, $\exists$, $\neg$, $\vee$, $\wedge$, $\Rightarrow$, $\Leftarrow$, $\L
 and $\oplus$ respectively.
 Equality and inequality are expressed as the infix operators {\tt =} and {\tt !=}.
 The {\em source} and {\em useful\_info} are optional.
-Figure~\ref{ExampleFormula} shows an example with typed higher-order formulae.
+Figure~\ref{ExampleFormulae} shows an example with typed higher-order formulae.
 
 \begin{figure}[htb]
 {\footnotesize
@@ -182,14 +182,14 @@ thf(heated_coffee_mix,axiom,
 
 thf(hot_coffee,conjecture,
     ? [Mixture: syrup > beverage] :
-      ~ ? [S: syrup] :
-          ( ( ( Mixture @ S ) = coffee )
-          & ( hot @ ( Mixture @ S ) ) ) ).
+    ! [S: syrup] :
+      ( ( ( Mixture @ S ) = coffee )
+      & ( hot @ ( Mixture @ S ) ) ) ).
 %------------------------------------------------------------------------------
 \end{verbatim}
 }}
 \caption{THF annotated formulae}
-\label{ExampleFormula}
+\label{ExampleFormulae}
 \end{figure}
 
 %--------------------------------------------------------------------------------------------------
@@ -315,7 +315,6 @@ include('Axioms/DAT001_0.ax').
 \label{ExampleHeader}
 \end{figure}
 
-
 This section has naturally focused on the successful parts of the TPTP history.
 There have also been some failed developments and suboptimal (in retrospect) decisions \frownie{}.
 For example, in 2015 there was an attempt to develop a description logic form for the TPTP 
@@ -336,9 +335,14 @@ improvement.
 \label{TSTP}
 
 The complement of the problem library is the TSTP solution library \cite{Sut07-CSR,Sut10}.
-% Started as the results collection for the TPTP circa 1997, became the TSTP circa 2002.
 The TSTP is built by running all the ATP systems that are available in the TPTP World on
 all the problems in the TPTP problem library.
+The TSTP started being built around 2005, using data provided by individual system developers.
+From 2010 to 2013 the TSTP was generated on the TPTP World servers at the University of Miami. 
+Since 2014 the ATP systems have been run on StarExec, initially on the StarExec Iowa cluster, 
+and since 2018 on the StarExec Miami cluster (see Section~\ref{StarExec}). 
+StarExec has provided stable platforms that produce reliably consistent and comparable data in 
+the TSTP.
 % The ATP systems come from a range of sources:
 % some were developed many years ago and are no longer distributed;
 % some are the most recent available, taken either from the systems’ web sites or from the most 
@@ -348,10 +352,201 @@ system variants on all the problems in the TPTP that they could attempt
 (therefore, e.g., systems that do model finding for FOF are not run on THF problems).
 This produced 1091026 runs, of which 432718 (39.6\%) solved the problem.
 
-Since 2014 the ATP systems have been run on StarExec \cite{SST14}, initially on the StarExec
-Iowa cluster, and since 2018 on the StarExec Miami cluster (see Section~\ref{StarExec}.
-StarExec has provided stable platforms that produce reliably consistent and comparable data in
-the TSTP.
+TSTP solution files have structure that mimics the TPTP problem files.
+The header section has four parts: 
+the first part identifies the ATP system, the problem, and the system's runtime parameters; 
+the second part provides information about the hardware, operating system, and resource limits; 
+the third part provides the SZS result and output values (see Sec tion~\ref{SZS}), and syntactic 
+characteristics of the solution; the last part contains comments.
+The formula section contains annotated formulae. 
+
+For derivations, where formulae are derived from parent formulae, e.g., in proofs, refutations, 
+etc., the {\em source} fields of the annotated formulae are used to capture parent-derived 
+formulae relationships in the derivation DAG.
+This includes source of the formula -- either the problem file or an inference.
+Inference data includes the name of the inference rule used, the semantic relationship between 
+the parents and the derived formula as an SZS ontology value (see Section~\ref{SZS}), and a 
+list of the parent annotated formulae names.
+Figure~\ref{ExampleDerivationFormulae} shows an example refutation from the E system \cite{SCV19} 
+[slightly modified] for the problem formulae in Figure~\ref{ExampleFormulae}, and 
+Figure~\ref{ExampleDerivationHeader} shows the corresponding header fields.
+
+\begin{figure}[htb]
+{\footnotesize
+{\setlength{\baselineskip}{3mm}
+\begin{verbatim}
+%------------------------------------------------------------------------------
+% File     : E---3.0.04
+% Problem  : Coffee 
+% Transfm  : none
+% Format   : tptp:raw
+% Command  : run_E %s %d THM
+
+% Computer : quokka.cs.miami.edu
+% Model    : x86_64 x86_64
+% CPU      : Intel(R) Xeon(R) CPU E5-2609 v2 @ 2.50GHz
+% Memory   : 64222MB
+% OS       : Linux 3.10.0-1160.36.2.el7.x86_64
+% CPULimit : 30s
+% WCLimit  : 0s
+% DateTime : Tue Feb 13 13:29:34 EST 2024
+
+% Result   : Theorem 0.00s 0.08s
+% Output   : Refutation 0.00s
+% Verified :
+% SZS Type : Refutation
+%            Derivation depth      :    5
+%            Number of leaves      :   10
+% Syntax   : Number of formulae    :   19 (   8 unt;   7 typ;   0 def)
+%            Number of atoms       :   16 (   7 equ;   0 cnn)
+%            Maximal formula atoms :    2 (   1 avg)
+%            Number of connectives :   42 (   6   ~;   2   |;   2   &;  32   @)
+%                                         (   0 <=>;   0  =>;   0  <=;   0 <~>)
+%            Maximal formula depth :    7 (   5 avg)
+%            Number of types       :    3 (   2 usr)
+%            Number of type conns  :   11 (  11   >;   0   *;   0   +;   0  <<)
+%            Number of symbols     :    7 (   5 usr;   2 con; 0-2 aty)
+%            Number of variables   :   15 (   0   ^  13   !;   2   ?;  15   :)
+
+% Comments :
+%------------------------------------------------------------------------------
+\end{verbatim}
+}}
+\caption{Example derivation header}
+\label{ExampleDerivationHeader}
+\end{figure}
+
+\begin{figure}[htb]
+{\footnotesize
+{\setlength{\baselineskip}{3mm}
+\begin{verbatim}
+%------------------------------------------------------------------------------
+thf(beverage_decl,type,   beverage: $tType ).
+thf(syrup_decl,type,      syrup: $tType ).
+thf(coffee_type,type,     coffee: beverage ).
+thf(mix_type,type,        mix: beverage > syrup > beverage ).
+thf(heat_type,type,       heat: beverage > beverage ).
+thf(heated_mix_type,type, heated_mix: beverage > syrup > beverage ).
+thf(hot_type,type,        hot: beverage > $o ).
+thf(decl_27,type,         esk1_1: ( syrup > beverage ) > syrup ).
+thf(decl_28,type,         esk2_1: ( syrup > beverage ) > syrup ).
+
+thf(hot_coffee,conjecture,
+    ? [X3: syrup > beverage] :
+    ! [X2: syrup] :
+      ( ( ( X3 @ X2 ) = coffee ) & ( hot @ ( X3 @ X2 ) ) ),
+    file('Coffee.p',hot_coffee) ).
+
+thf(heated_coffee_mix,axiom,
+    ! [X2: syrup] :
+      ( ( heated_mix @ coffee @ X2 ) = coffee ),
+    file('Coffee.p',heated_coffee_mix) ).
+
+thf(hot_mixture,axiom,
+    ! [X1: beverage,X2: syrup] : ( hot @ ( heated_mix @ X1 @ X2 ) ),
+    file('Coffee.p',hot_mixture) ).
+
+thf(c_0_3,negated_conjecture,
+    ~ ? [X3: syrup > beverage] :
+      ! [X2: syrup] :
+        ( ( ( X3 @ X2 ) = coffee ) & ( hot @ ( X3 @ X2 ) ) ),
+    inference(assume_negation,[status(cth)],[hot_coffee]) ).
+
+thf(c_0_4,negated_conjecture,
+    ! [X16: syrup > beverage] :
+      ( ( ( X16 @ ( esk1_1 @ X16 ) ) != coffee )
+      | ~ ( hot @ ( X16 @ ( esk2_1 @ X16 ) ) ) ),
+    inference(fof_nnf,[status(thm)],[inference(skolemize,[status(esa)],
+[inference(variable_rename,[status(thm)],[inference(shift_quantors,[status(thm)],
+[inference(fof_nnf,[status(thm)],[c_0_3])])])])]) ).
+
+thf(c_0_10,negated_conjecture,
+    ~ ( hot @ coffee ),
+    inference(cn,[status(thm)],[inference(rw,[status(thm)],
+[inference(spm,[status(thm)],[c_0_4,heated_coffee_mix]),heated_coffee_mix])]) ).
+
+thf(c_0_11,plain,
+    $false,
+    inference(sr,[status(thm)],[inference(spm,[status(thm)],
+[hot_mixture,heated_coffee_mix]),c_0_10]),[proof] ).
+%------------------------------------------------------------------------------
+\end{verbatim}
+}}
+\caption{Example derivation formulae}
+\label{ExampleDerivationFormulae}
+\end{figure}
+
+For interpretations (typically models) the annotated formulae are used to describe the domains
+and symbol mappings of Tarskian interpretations, or the formulae that induce Herbrand models.
+A TPTP format for interpretations with finite domains was previously been defined \cite{SS+06}, 
+and has served the ATP community adequately for almost 20 years. 
+Recently the need for a format for interpretations with infinite domains, and for a format for 
+Kripke interpretations, has led to the development of a new TPTP format for interpretations
+\cite{SSP24}.
+Figure~\ref{ExampleModel} shows the problem formulae and a model that uses intergers as the domain.
+Please read \cite{SSP24} for lots more details!
+
+\begin{figure}[htb]
+{\footnotesize
+{\setlength{\baselineskip}{3mm}
+\begin{verbatim}
+%---- Problem formulae --------------------------------------------------------
+tff(person_type,type,        person: $tType ).
+tff(bob_decl,type,           bob: person ).
+tff(child_of_decl,type,      child_of: person > person ).
+tff(is_descendant_decl,type, is_descendant: (person * person) > $o ).
+
+tff(descendents_different,axiom,
+    ! [A: person,D: person] : 
+      ( is_descendant(A,D) => ( A != D ) ) ).
+
+tff(descendent_transitive,axiom,
+    ! [A: person,C: person,G: person] :
+      ( ( is_descendant(A,C) & is_descendant(C,G) ) 
+     => is_descendant(A,G) ) ).
+
+tff(child_is_descendant,axiom,
+    ! [P: person] : is_descendant(P,child_of(P)) ).
+
+tff(all_have_child,axiom,
+    ! [P: person] : ? [C: person] : C = child_of(P) ).
+%------------------------------------------------------------------------------
+
+%---- Model -------------------------------------------------------------------
+tff(person_type,type,        person: $tType ).
+tff(bob_decl,type,           bob: person ).
+tff(child_of_decl,type,      child_of: person > person ).
+tff(is_descendant_decl,type, is_descendant: ( person * person ) > $o ).
+
+tff(int2person_decl,type,    int2person: $int > person ).
+
+tff(people,interpretation,
+%----Domain for type person is the integers
+    ( ( ! [P: person] : ? [I: $int] : int2person(I) = P
+%----The type promoter is a bijection (injective and surjective)
+      & ! [I1: $int,I2: $int] : 
+          ( int2person(I1) = int2person(I2) => I1 = I2 ) )
+%----Mapping people to integers. Note that Bob's ancestors will be interpreted 
+%----as negative integers.
+    & ( bob = int2person(0)
+      & ! [I: $int] : child_of(int2person(I)) = int2person($sum(I,1)) )
+%----Interpretation of descendancy
+    & ! [A: $int,D: $int] : 
+        ( is_descendant(int2person(A),int2person(D)) <=> $less(A,D) ) ) ).
+%------------------------------------------------------------------------------
+\end{verbatim}
+}}
+\caption{Example infinite model}
+\label{ExampleModel}
+\end{figure}
+
+One use of the TSTP is for ATP system developers to examine solutions to problems and thus 
+understand how they can be solved, leading to improvements to their own systems. 
+Another use is for computing the TPTP problem ratings (see Section~\ref{Ratings}).
+
+\paragraph{Resource Limits:}
+A common question, and often a misbelief, is whether the resource limits used should be increased
+to find more solutions.
 Analysis shows that increasing resource limits does not significantly affect which problems 
 are solved by an ATP system. 
 Figure~\ref{PPPPlot} illustrates this point; it plots the CPU times taken by several contemporary 
@@ -364,17 +559,17 @@ This point is called the system's Peter Principle \cite{PH69} Point (PPP), as it
 which the system has reached its level of incompetence. 
 Evidently a linear increase in the computational resources beyond the PPP would not lead to the 
 solution of significantly more problems. 
-The PPP thus defines a realistic computational resource limit for the system. 
+The PPP thus defines a realistic computational resource limit for the system, and if enough CPU 
+time is allowed for an ATP system to reach its PPP, a usefully accurate measure of what problems 
+it can solve is achieved.
 % From an ATP perspective, the PPP is the point at which the ATP system gets lost in its quickly 
 % growing search space. 
 % Even though there may be enough memory to represent the search space at the PPP, the system is 
 % largely unable to find a solution within the space. 
 % The point thus also defines a realistic memory resource limit. 
-Therefore, provided that enough CPU time and memory are allowed for an ATP system to reach its 
-PPP, a usefully accurate measure of what problems it can solve is achieved.
 The performance data in the TSTP is produced with adequate resource limits.
 
-\begin{figure}[t!]
+\begin{figure}[htb]
 \centering
 \includegraphics[width=0.6\textwidth]{FOF_THM_RFO_PPP.pdf}
 \vspace*{-1em}
@@ -382,46 +577,62 @@ The performance data in the TSTP is produced with adequate resource limits.
 \label{PPPPlot}
 \end{figure}
 
-One use of the TSTP is for ATP system developers to examine solutions to problems and thus 
-understand how they can be solved, leading to improvements to their own systems. 
-Another use is for computing the TPTP problem ratings (see Section~\ref{Ratings}).
-
 %--------------------------------------------------------------------------------------------------
 \section{The SZS Ontologies}
 \label{SZS}
 
-The TPTP infrastructure uses the three SZS ontologies to help facilitate 
-automatic processing of TPTP problems and ATP systems' output 
-\cite{Sut08-KEAPPA} (named ``SZS'' after the authors of the first 
-presentation of the ontologies \cite{SZS03}).
-The ontologies provide values to specify the logical status of problems, and 
-to describe logical data.
+The SZS ontologies \cite{Sut08-KEAPPA} (named ``SZS'' after the authors of the first presentation 
+of the ontologies \cite{SZS03}) provide values to specify the logical status of problems, 
+the status of ATP systems' (and other tools) outputs, and to describe logical data.
+Examples include whether a conjecture is a {\tt Theorem} of the problem axioms, if an
+axiomatization is {\tt Satisfiable}, that the output from a model finder is a {\tt FiniteModel},
+or that a reasoning system had a {\tt TimeOut}.
+The Success ontology provides values for the logical status of a conjecture with respect to a set 
+of axioms, e.g., a TPTP problem whose conjecture is a logical consequence of the axioms is tagged 
+as a {\tt Theorem} (as in Figure~\ref{ExampleHeader}), and a model finder that establishes that a 
+set of axioms is consistent should report {\tt Satisfiable}.
+The Success ontology is also used to specify the semantic relationship between the parents and 
+inferred formulae of an inference, as done in TPTP format derivations (see Section~\ref{TSTP}).
+The NoSuccess ontology catalogs reasons why an ATP system/tool has failed, e.g., an ATP system 
+might report {\tt Timeout}.
+The Dataform ontology provides values for describing the form of logical data, as might be output 
+from an ATP system/tool, e.g., a model finder might output a {\tt FiniteModel}.
 Figure~\ref{SZS} shows some of the salient nodes of the ontologies.
-The Success ontology provides values for the logical status of a conjecture 
-with respect to a set of axioms, e.g., a TPTP problem whose conjecture is a
-logical consequence of the axioms is tagged as a {\tt Theorem} (as in 
-Figure~\ref{ExampleHeader}), and a model finder that establishes that a set 
-of axioms is consistent should report {\tt Satisfiable}.
-The Success ontology can also be used to specify the semantic relationship 
-between the parents and inferred formula of an inference, as done in TPTP 
-format derivations \cite{SS+06} (see Section~\ref{TPTP} for an example).
-The NoSuccess ontology catalogs reasons why an ATP system/tool has failed,
-e.g., an ATP system might report {\tt Timeout}.
-The Dataform ontology provides values for describing the form of logical data,
-as might be output from an ATP system/tool, e.g., a model finder might output 
-a {\tt FiniteModel}.
-The SZS standard also recommends the precise way in which the ontology values 
-should be presented in ATP system output, in order to facilitate easy 
-processing.
+Their definitions and abbreviations are~\ldots
+\begin{packed_itemize}
+\item {\tt Theorem} ({\tt THM})
+\item {\tt Theorem} ({\tt THM})
+\item {\tt Theorem} ({\tt THM})
+\item {\tt Theorem} ({\tt THM})
+\item {\tt Theorem} ({\tt THM})
+\item {\tt Theorem} ({\tt THM})
+\item {\tt Theorem} ({\tt THM})
+\item {\tt Theorem} ({\tt THM})
+\item {\tt Theorem} ({\tt THM})
+\end{packed_itemize}
 
-\begin{figure}[bht]
-\begin{center}
-\mbox{} 
+\begin{figure}[htb]
+\centering
 \includegraphics[width=0.75\textwidth]{SZSOntologies.pdf}
 \caption{The SZS ontologies}
 \label{SZS}
-\end{center}
 \end{figure} 
+
+The SZS standard also specifies the precise way in which the ontology values should be presented
+in ATP system output, in order to facilitate easy processing.
+For example, if an ATP system has established that a conjecture is not a theorem of the axioms,
+by finding a finite countermodel of the axioms and negated conjecture, the SZS format output 
+would be (see Section~\ref{TSTP} for the format of the annotated formulae)~\ldots \\
+\begin{minipage}{\textwidth}
+\begin{verbatim}
+    % SZS status CounterSatisfiable
+    % SZS output start FiniteModel
+    ... annotated formulae for the finite model 
+    % SZS output end FiniteModel
+\end{verbatim}
+\end{minipage}
+
+\vspace*{1em}
 
 %--------------------------------------------------------------------------------------------------
 \section{Specialist Problem Classes}
@@ -441,22 +652,40 @@ For example, the separation of ``essentially propositional'' problems was motiva
 that SPASS \cite{WA+99} performed differently on the ALC problems in the SYN domain of the TPTP.
 A data-driven test of homogeneity is also possible \cite{FS02}.
 
-The characteristics currently used to define the SPCs in the TPTP are~\ldots
+The characteristics currently used to define the SPCs in the TPTP are shown in 
+Figure~\ref{SPCCharacteristics}.
+Using these characteristics 223 SPCs are defined in TPTP v8.2.0. 
+For example, the SPC
+% Some examples are:
+% {\tt CNF\_SAT\_EPR\_PEQ\_UEQ} -- clause normal form satisfiable clauses that are effectively
+% propositional, have purely equality literals in unit equality clauses;
+% {\tt FOF\_THM\_RFO\_SEQ} -- first-order theorems that are ``really first-order'' (not known
+% to be effectively propositional), and contain some (not only) equality;
+{\tt TF0\_THM\_NEQ\_ARI} contains typed monomorphic first-order theorems that have no equality but 
+include arithmetic.
+The header section of each problem in the TPTP problem library (see Section~\ref{TPTP}) includes 
+its SPC.
+The SPCs are used when computing the TPTP problems difficulty ratings, as explained in
+Section~\ref{Ratings}.
+
+\begin{figure}[bht]
+\centering
 \begin{packed_itemize}
 \item TPTP language: \\
-      {\tt CNF} -- Clause Normal Form
+      \begin{tabular}{@{}p{5cm}l}
+      {\tt CNF} -- Clause Normal Form &
       {\tt FOF} -- First-Order Form \\
-      {\tt TF0} -- Typed Monomorphic First-order form \\
-      {\tt TF1} -- Typed Polymorphic First-order form \\
-      {\tt TX0} -- Typed Monomorphic eXtended First-order form \\
-      {\tt TX1} -- Typed Polymorphic eXtended First-order form \\
-      {\tt TH0} -- Typed Monomorphic Higher-order form \\
-      {\tt TH1} -- Typed Polymorphic Higher-order form
+      {\tt TF0/1} -- Typed First-order & Monomorphic/Polymorphic \\
+      {\tt TX0/1} -- Typed eXtended f-o & Monomorphic/Polymorphic \\
+      {\tt TH0/1} -- Typed Higher-order & Monomorphic/Polymorphic \\
+      {\tt NX0/1} -- Non-classical {\tt TX0/1} &
+      {\tt NH0/1} -- Non-classical {\tt TH0/1} \\
+      \end{tabular}
 \item SZS status: \\
       \begin{tabular}{@{}p{5cm}l}
       {\tt THM} -- Theorem &
       {\tt CSA} -- CounterSAtisfiable \\
-      \multicolumn{2}{@{}l}{{\tt CAX} -- Contradictory AXioms (merged with {\tt THM} in this work)} \\
+      {\tt CAX} -- Contradictory AXioms & \\
       {\tt UNS} -- UNSatisfiable &
       {\tt SAT} -- SATisfiable \\
       {\tt UNK} -- UNKown &
@@ -486,21 +715,9 @@ The characteristics currently used to define the SPCs in the TPTP are~\ldots
       {\tt ARI} -- ARIthmetic.
       \end{tabular}
 \end{packed_itemize}
-
-Using these characteristics 223 SPCs are defined in TPTP v8.2.0. 
-For example, the SPC
-% Some examples are:
-% {\tt CNF\_SAT\_EPR\_PEQ\_UEQ} -- clause normal form satisfiable clauses that are effectively
-% propositional, have purely equality literals in unit equality clauses;
-% {\tt FOF\_THM\_RFO\_SEQ} -- first-order theorems that are ``really first-order'' (not known
-% to be effectively propositional), and contain some (not only) equality;
-{\tt TF0\_THM\_NEQ\_ARI} contains typed monomorphic first-order theorems that have no equality but 
-include arithmetic.
-The header section of each problem in the TPTP problem library (see Section~\ref{TPT}) includes 
-its SPC.
-
-The SPCs are used when computing the TPTP problems difficulty ratings, as explained in
-Section~\ref{Ratings}.
+\caption{SPC characteristics}
+\label{SPCCharacteristics}
+\end{figure} 
 
 %--------------------------------------------------------------------------------------------------
 \section{Problem Difficulty Ratings}
