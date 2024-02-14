@@ -587,35 +587,76 @@ the status of ATP systems' (and other tools) outputs, and to describe logical da
 Examples include whether a conjecture is a {\tt Theorem} of the problem axioms, if an
 axiomatization is {\tt Satisfiable}, that the output from a model finder is a {\tt FiniteModel},
 or that a reasoning system had a {\tt TimeOut}.
-The Success ontology provides values for the logical status of a conjecture with respect to a set 
-of axioms, e.g., a TPTP problem whose conjecture is a logical consequence of the axioms is tagged 
-as a {\tt Theorem} (as in Figure~\ref{ExampleHeader}), and a model finder that establishes that a 
-set of axioms is consistent should report {\tt Satisfiable}.
-The Success ontology is also used to specify the semantic relationship between the parents and 
-inferred formulae of an inference, as done in TPTP format derivations (see Section~\ref{TSTP}).
+The Success ontology provides values for the logical status of a conjecture ``C'' with respect to a 
+set of axioms ``Ax'', e.g., a TPTP problem whose conjecture is a logical consequence of the axioms 
+is tagged as a {\tt Theorem} (as in Figure~\ref{ExampleHeader}), and a model finder that 
+establishes that a set of axioms (with no conjecture) is consistent should report 
+{\tt Satisfiable}.
+The Success ontology is also used to specify the semantic relationship between the parents ``Ax''
+and inferred formulae ``C'' of an inference, as done in TPTP format derivations (see 
+Section~\ref{TSTP}).
 The NoSuccess ontology catalogs reasons why an ATP system/tool has failed, e.g., an ATP system 
 might report {\tt Timeout}.
 The Dataform ontology provides values for describing the form of logical data, as might be output 
 from an ATP system/tool, e.g., a model finder might output a {\tt FiniteModel}.
-Figure~\ref{SZS} shows some of the salient nodes of the ontologies.
-Their definitions and abbreviations are~\ldots
-\begin{packed_itemize}
-\item {\tt Theorem} ({\tt THM})
-\item {\tt Theorem} ({\tt THM})
-\item {\tt Theorem} ({\tt THM})
-\item {\tt Theorem} ({\tt THM})
-\item {\tt Theorem} ({\tt THM})
-\item {\tt Theorem} ({\tt THM})
-\item {\tt Theorem} ({\tt THM})
-\item {\tt Theorem} ({\tt THM})
-\item {\tt Theorem} ({\tt THM})
-\end{packed_itemize}
+Figure~\ref{SZSExtract} shows some of the salient nodes of the ontologies.
+Their expanded names and their (abbreviated) definitions are listed in Figure~\ref{SZSTable}.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.75\textwidth]{SZSOntologies.pdf}
-\caption{The SZS ontologies}
-\label{SZS}
+\includegraphics[width=0.75\textwidth]{SZSExtract.pdf}
+\caption{Extract of the SZS ontologies}
+\label{SZSExtract}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\begin{tabular}{lll}
+\hline
+{\tt SUC} & {\tt Success}             & 
+The logical data has been processed successfully. \\
+{\tt ESA} & {\tt Equisatisfiable}     & 
+There exists a model of Ax iff there exists a model of C.\\
+{\tt THM} & {\tt Satisfiable}         & 
+Some interpretations are models of Ax.\\
+{\tt THM} & {\tt Theorem}             & 
+All models of Ax are models of C.\\
+{\tt CTH} & {\tt CounterTheorem}      & 
+All models of Ax are models of ~C.\\
+{\tt CAX} & {\tt ContradictoryAxioms} & 
+No interpretations are models of Ax.\\
+{\tt CSA} & {\tt CounterSatisfiable}  & 
+Some models of Ax are models of ~C.\\
+{\tt UNS} & {\tt Unsatisfiable}       & 
+All interpretations are models of ~Ax.\\
+\hline
+{\tt NOS} & {\tt NoSuccess}           & 
+The logical data has not been processed successfully. \\
+{\tt ERR} & {\tt Error}               & 
+Stopped due to an error. \\
+{\tt TMO} & {\tt Timeout}             & 
+Stopped because a time limit ran out. \\
+{\tt GUP} & {\tt GaveUp}              & 
+Gave up of its own accord. \\
+{\tt IAP} & {\tt Inappropriate}       & 
+Gave up because it cannot process this type of data. \\
+\hline
+{\tt LDa} & {\tt LogicalData}         & 
+Logical data. \\
+{\tt Prf} & {\tt Proof}               & 
+A proof. \\
+{\tt Ref} & {\tt Refutation}          & 
+A refutation (ending with $false$). \\
+{\tt Mod} & {\tt Model}               & 
+A model. \\
+{\tt FMo} & {\tt FiniteModel}         & 
+A model with a finite domain. \\
+{\tt Sat} & {\tt Saturation}          & 
+A saturated set of formulae. \\
+\hline
+\end{tabular}
+\caption{SZS ontology values}
+\label{SZSTable}
 \end{figure} 
 
 The SZS standard also specifies the precise way in which the ontology values should be presented
@@ -740,6 +781,8 @@ problems that are solved by some of the non-subsumed systems get a rating betwee
 0.00 and 1.00 (``difficult''); 
 problems that are solved by none of the non-subsumed systems get a rating of 1.00 (``unsolved'').
 
+PROGRESS
+
 %--------------------------------------------------------------------------------------------------
 \section{StarExec and SystemOnTPTP}
 \label{StarExec}
@@ -758,6 +801,9 @@ limit.
 
 The CADE ATP System Competition (CASC) \cite{Sut16} is the annual evaluation of fully automatic,
 classical logic, ATP systems - the world championship for such systems.
+CASC is held at each CADE (the International Conference on Automated Deduction) and IJCAR
+(the International Joint Conference on Automated Reasoning) conference -- the major forums
+for the presentation of new research in all aspects of automated deduction.
 One purpose of CASC is to provide a public evaluation of the relative capabilities of ATP systems.
 Additionally, CASC aims to
 stimulate ATP research,
@@ -766,17 +812,6 @@ deployed in applications,
 provide an inspiring environment for personal interaction between ATP researchers,
 and
 expose ATP systems within and beyond the ATP community.
-CASC evaluates the performance of the ATP systems in terms of
-the number of problems solved,
-the number of acceptable solutions (proofs or models) output, and
-the average time taken for problems solved,
-in the context of
-a bounded number of eligible problems and
-specified time limits.
-
-CASC is held at each CADE (the International Conference on Automated Deduction) and IJCAR
-(the International Joint Conference on Automated Reasoning) conference -- the major forums
-for the presentation of new research in all aspects of automated deduction.
 Over the years CASC has been a catalyst for impressive improvements in ATP, stimulating both 
 theoretical and implementation advances \cite{Nie02-Paper}.
 It has provided a forum at which empirically successful implementation efforts are acknowledged 
@@ -785,104 +820,26 @@ developers exchange ideas and techniques.
 The CASC web site provides access to all the details:
 \href{http://www.tptp.org/CASC/}{{\tt www.tptp.org/CASC}}.
 
-The first CASC was held at CADE-13 in 1996, at DIMACS in Rutgers University, USA, in collaboration
-with Christian Suttner.
-Of particular interest for this IJCAR is that CASC was conceived of in 1994 after CADE-12 in
-Nancy, when we were sitting on a bench under a tree in Parc de la Pépinière, burning time before
-our train departures.
-
 CASC is run in divisions according to problem and system characteristics. 
-Over the years the following divisions have existed (those marked with an
-* are the divisions for CASC-25):
-\begin{packed_itemize}
-\item THF$^*$: 
-      {\bf T}yped {\bf H}igher-order {\bf F}orm theorems (axioms with a 
-      provable conjecture).
-\item THN$^*$: 
-      {\bf T}yped {\bf H}igher-order form {\bf N}on-theorems (axioms 
-      with a countersatisfiable (i.e., unprovable) conjecture, and 
-      satisfiable axiom sets).
-\item TFA$^*$: 
-      {\bf T}yped {\bf F}irst-order with {\bf A}rithmetic theorems (axioms 
-      with a provable conjecture).
-\item TFN$^*$: 
-      {\bf T}yped {\bf F}irst-order with arithmetic {\bf N}on-theorems 
-      (axioms with a countersatisfiable conjecture, and satisfiable axiom sets).
-\item FOF$^*$: 
-      {\bf F}irst-{\bf O}rder {\bf F}orm theorems (axioms with a provable 
-      conjecture). 
-\item FNT$^*$: 
-      {\bf F}irst-order form {\bf N}on-{\bf T}heorems (axioms with a 
-      countersatisfiable conjecture, and satisfiable axiom sets).
-\item CNF:
-      {\bf C}lause {\bf N}ormal {\bf F}orm theorems (unsatisfiable clause 
-      sets) that are not effectively propositional\footnote{%
-      {\em Effectively propositional} means that the problem is known to be 
-      reducible to a propositional problem, e.g., a CNF problem that has no 
-      functions with arity greater than zero.}, and not unit equality 
-      problems (see the UEQ division below).
-\item SAT:
-      {\bf C}lause {\bf N}ormal {\bf F}orm non-theorems (satisfiable clause 
-      sets) that are not effectively propositional, and not unit equality 
-      problems (see the UEQ division below).
-\item EPR$^*$: 
-      {\bf E}ffectively {\bf PR}opositional theorems and non-theorems
-      (unsatisfiable and satisfiable clause sets).
-\item UEQ:
-      {\bf U}nit {\bf EQ}uality theorems (unsatisfiable clause
-      sets) that are not effectively propositional.
-\item SEM:
-      FOF theorems based on a specified axiomatization of a specified
-      {\bf SEM}antic domain.
-\item LTB$^*$: 
-      First-order form theorems (axioms with a provable 
-      conjecture) from {\bf L}arge {\bf T}heories, presented in {\bf B}atches
-      with a shared time limit.
-\end{packed_itemize}
-
-% Some of the divisions are further divided into problem categories, which
-% makes it possible to analyze, at a more fine grained level, which systems
-% work well for what types of problems.
-% The problem categories have no effect on the competition rankings, which
-% are made at only the division level.
-The different logics and syntactic characteristics of the problems in the
-various divisions provide different challenges for ATP systems. 
-The tasks of proving theorems and showing unsatisfiability (which can
-be treated similarly) are quite distinct from establishing non-provability 
-and satisfiablility (which can also be treated similarly).
-
-Problems for CASC are taken from the TPTP Problem Library. 
-The TPTP version used for CASC is released after the competition,
-so that new problems have not been seen by the entrants. 
-In some divisions the systems are ranked according to the number of problems 
-solved with an acceptable proof/model output, and some divisions the systems
-are ranked according to the number of problems solved but not necessarily 
-accompanied by a proof or model
-(thus giving only an assurance of the existence of a proof/model). 
+The different logics and syntactic characteristics of the problems in the various divisions 
+provide different challenges for ATP systems. 
+The tasks of proving theorems and showing unsatisfiability (which can be treated similarly) are 
+quite distinct from establishing non-provability and satisfiablility (which can also be treated 
+similarly).
+Problems for CASC are taken from the TPTP problem library, and some other sources. 
+The systems are ranked according to the number of problems solved with an acceptable proof/model 
+output.
 Ties are broken according to the average time over problems solved.
 Division winners are announced and prizes are awarded.
 In addition to the ranking criteria, three other measures are made and
 presented in the results:
 The {\em state-of-the-art (SoTA) contribution} quantifies the unique
 abilities of each system.
-For each problem solved by a system, its SoTA contribution for the problem 
-is the inverse of the number of systems that solved the problem, and
-% so that if a system is the
-% only one to solve a problem then its SoTA contribution for the problem 
-% is 1.00, and if all the systems solve a problem their SoTA contributions for 
-% the problem are the inverse of the number of systems.
-it's overall SoTA contribution is the average SoTA contribution over 
-the problems it solved.
 The {\em efficiency measure} is a combined measure that balances the time
 taken for each problem solved against the number of problems solved.
-It is the average of the inverses of the times for problems solved,
-This can be interpreted intuitively as the average of the solution rates
-for problems solved, multiplied by the fraction of problems solved.
 The {\em core usage} is the average of the ratios of CPU time to
 wall clock time used, over the problems solved.
-This measures the extent to which the systems take advantage of multiple cores.
 
-CASC typically has 20 to 30 ATP systems entered.
 For each CASC the division winners of the previous CASC are automatically
 entered to provide benchmarks against which progress can be judged.
 Additionally, a fixed version (initially v3.2, later v3.3) of the well known 
@@ -890,87 +847,55 @@ Otter ATP system was entered in every CASC from 2002 to 2011, as a fixed
 point against which progress could be judged.
 By 2011 Otter was no longer competitive, and was replaced by Prover9 2009-11A
 in 2012.
-Over all 20 CASCs so far 99 distinct ATP systems have been entered.
+Over all 20 CASCs so far 99 distinct ATP systems have been entered.  ZZZZ
 Almost all the ATP systems have come from academia, partially due to the
 CASC requirement that all source code must be published on the CASC web site.
-The most popular divisions have been the FOF, FNT, CNF, SAT, EPR, and 
-UEQ divisions.
-Some systems have emerged as dominant in some of the divisions:
-Satallax in the THF division, Vampire in the FOF and CNF divisions, Paradox
-in the FNT and SAT divisions (with iProver now coming on strong), iProver
-in the EPR division, and Waldmeister in the UEQ division.
+Some systems have emerged as dominant in some of the divisions, with Vampire being a well-known
+example.
 The strengths of these systems stem from four main areas:
-solid theoretical foundations, significant implementation efforts (in terms
-of coding and data structures), extensive testing and tuning, and an
-understanding of how to optimize for CASC.
-For example, Vampire is founded on the theoretical principles of 
-superposition, has a highly efficient implementation in C++ using code
-trees and advanced structures for representing logical data, is repeatedly
-tested and tuned on the TPTP problem library, and has special modes for
-the various divisions of CASC.
-Technical information about these systems, and the techniques they employ,
-can be found on the individual CASC web pages.
+solid theoretical foundations, significant implementation efforts (in terms of coding and data 
+structures), extensive testing and tuning, and an understanding of how to optimize for CASC.
 
-The design and organization of CASC has evolved over the years to a 
-sophisticated state.
-Decisions made for CASC (alongside the TPTP) have had an influence on the 
-directions of development in ATP.
+The design and organization of CASC has evolved over the years to a sophisticated state.
+Decisions made for CASC (alongside the TPTP) have had an influence on the directions of 
+development in ATP.
 It is interesting to look back on some of the key decisions that have helped 
 bring the competition to its current state.
 \begin{packed_itemize}
-\item CASC-13, 1996: The first CASC stimulated research towards robust,
-    fully automatic systems that take only logical formulae as input.
-    It increased the visibility of systems and developers, and rewarded 
-    implementation efforts.
-\item CASC-14, 1997: Introduced the SAT division, stimulating the 
-    development of model finding systems for CNF.
-%    Gandalf demonstrated the great benefits of strategy scheduling,
-%    which has evolved into a standard approach in ATP.
-\item CASC-15, 1998: Introduced the FOF division, starting the slow demise 
-    of CNF to becoming just the ``assembly language'' of ATP. 
-\item CASC-16, 1999: Changes to the problem selection process motivated the 
-    development of techniques for automatic tuning of ATP systems' search
-    parameters.
-% \item CASC-17, 2000: Systems had to be delivered as a ``installation 
-%     package'', hoping to make ATP systems easier for users to install 
-%     and use.
-\item CASC-JC, 2001: Introduced ranking based on proof output, starting the
-    the trend towards ATP systems that efficiently output proofs and models.
-    Introduced the EPR division, stimulating the development of specialized
-    techniques for this important subclass of problems.
-% \item CASC-18, 2002:
-% \item CASC-19, 2003:
-% \item CASC-J2, 2004:
-\item CASC-20, 2005: Required systems to develop builtin equality reasoning,
-    by removing the equality axioms from all TPTP  problems.
-\item CASC-J3, 2006: The FOF division was promoted as the most important,
-    stimulating development of ATP systems for full first-order logic.
-\item CASC-21, 2007: Introduced the FNT division, further stimulating the
-    development of model finding systems.
-\item CASC-J4, 2008: Introduced the LTB division, stimulating the development
-    of techniques for automatically dealing with very large axiom sets.
-% \item CASC-22, 2009: 
-\item CASC-J5, 2010: Introduced the THF division, stimulating development
-    of ATP systems for higher-order logic.
-\item CASC-23, 2011: Introduced the TFA division, stimulating development
-    of ATP systems for full first-order logic with arithmetic.
-\item CASC-J6, 2012: Otter replaced by Prover9 as the ``fixed-point'' in the
-    FOF division, demonstrating the progress in ATP.
+\item CASC-13, 1996: The first CASC, with the CNF division.
+\item CASC-14, 1997: Introduced the SAT division, stimulating the development of model finding 
+      systems for CNF.
+\item CASC-15, 1998: Introduced the FOF division, starting the slow demise of CNF to becoming 
+      the ``assembly language'' of ATP. 
+\item CASC-JC, 2001: Introduced ranking based on proof output, and introduced the EPR division.
+\item CASC-21, 2007: Introduced the FNT division, further stimulating the development of model 
+      finding systems.
+\item CASC-J4, 2008: Introduced the LTB division, stimulating the development of techniques for 
+      dealing with very large axiom sets.
+\item CASC-J5, 2010: Introduced the THF division, stimulating development of ATP systems for 
+      higher-order logic.
+\item CASC-23, 2011: Introduced the TFA division, stimulating development of ATP systems for 
+      first-order logic with arithmetic.
 \item CASC-24, 2013: Removed the CNF division, confirming the demise of CNF.
-\item CASC-J7, 2014: Required use of the SZS ontology, so the ATP systems 
-    unambiguously report what they have established about the problem.
-\item CASC-25, 2015: Introduced the THN and TFN divisions, stimulating
-    development of model finding for the THF and TFA logics.
+\item CASC-J7, 2014: Required use of the SZS ontology.
+\item CASC-25, 2015: Introduced the TFN division, stimulating development of model finding typed 
+      first-order logic.
 \end{packed_itemize}
 
-Over the years the TPTP and CASC have increasingly been used as a conduit 
-for ATP users to provide samples of their problems to ATP system developers.
-Users' problems that are contributed to the TPTP are eligible for use
-in CASC.
-The problems are then exposed to ATP system developers, who improve their 
-systems' performances on the problems, in order to perform well in CASC.
-This completes a cycle that provides the users with more effective tools
-for solving their problems.
+Over the years the TPTP and CASC have increasingly been used as a conduit for ATP users to provide 
+samples of their problems to ATP system developers.
+Users' problems that are contributed to the TPTP are eligible for use in CASC.
+The problems are then exposed to ATP system developers, who improve their systems' performances 
+on the problems, in order to perform well in CASC.
+This completes a cycle that provides the users with more effective tools for solving their 
+problems.
+
+The first CASC was held at CADE-13 in 1996, at DIMACS in Rutgers University, USA, in collaboration
+with Christian Suttner.
+Of particular interest for this IJCAR is that CASC was conceived of in 1994 after CADE-12 in
+Nancy, when we were sitting on a bench under a tree in Parc de la Pépinière, burning time before
+our train departures.
+
 %--------------------------------------------------------------------------------------------------
 \section{TPTP World Users}
 \label{Users}
