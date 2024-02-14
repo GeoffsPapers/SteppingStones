@@ -769,6 +769,7 @@ the problem is for current ATP systems \cite{SS01}.
 The ratings are based on performance data in the TSTP (see Section~\ref{TSTP}), and are updated
 in each TPTP edition.
 Rating is done separately for each SPC.
+CLEANING
 First, a partial order between systems is determined according to whether or not a system 
 solves a strict superset of the problems solved by another system. 
 If a strict superset is solved, the first system is said to {\em subsume} the second. 
@@ -781,7 +782,44 @@ problems that are solved by some of the non-subsumed systems get a rating betwee
 0.00 and 1.00 (``difficult''); 
 problems that are solved by none of the non-subsumed systems get a rating of 1.00 (``unsolved'').
 
-PROGRESS
+The TPTP difficulty ratings of problems (that are unchanged) provide a way to assess progress 
+in the field -- as the problems are not actually getting easier decreases in the difficulty
+rating are evidence of progress in ATP systems.
+Figures~\ref{Ratings_v5.0.0_v6.4.0} and~\ref{Ratings_v6.3.0_v8.2.0} plot the average difficulty
+ratings overall and for each of the four language forms in the TPTP World (after some sensible
+data cleaning).
+Figure~\ref{Ratings_v5.0.0_v6.4.0} is taken from \cite{Sut17}, published in 2017.
+It plots the average ratings for the 14527 problems that had been unchanged and whose ratings 
+had not been stuck at 0.00 or 1.00, from v5.0.0 that was released in 2010 to v6.4.0 that was
+released in 2016. 
+Figure~\ref{Ratings_v6.3.0_v8.2.0} is taken from \cite{SK+24}, published in 2024.
+It plots the average ratings for the 16236 problems that had been unchanged and whose ratings 
+had not been stuck at 0.00 or 1.00, from v6.3.0 that was released in 2016 to v8.2.0 that was
+released in 2023. 
+The two figures’ plots dovetail quite well, which gives confidence that they really are 
+comparable (there are some minor differences caused by data cleaning and recent refinements to 
+the difficulty rating calculations). 
+The older plots show a quite clear downward trend both overall and for the four language forms, 
+while the new plots do not. 
+Possible reasons are discussed in \cite{SK+24}.
+
+\begin{figure}[t!]
+\centering
+\begin{minipage}[t]{.49\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{RatingsDecline_v5.0.0_v6.4.0.pdf}
+  \vspace*{-2em}
+  \caption{Ratings from v5.0.0 to v6.4.0}
+  \label{Ratings_v5.0.0_v6.4.0}
+\end{minipage}
+\begin{minipage}[t]{.49\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{RatingsDecline_v6.3.0_v8.2.0.pdf}
+  \vspace*{-2em}
+  \caption{Ratings from v6.3.0 to v8.2.0}
+  \label{Ratings_v6.3.0_v8.2.0}
+\end{minipage}
+\end{figure}
 
 %--------------------------------------------------------------------------------------------------
 \section{StarExec and SystemOnTPTP}
