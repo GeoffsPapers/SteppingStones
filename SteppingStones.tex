@@ -79,7 +79,7 @@ the TPTP languages \cite{SS+06},
 the SZS ontologies \cite{Sut08-KEAPPA},
 the Specialist Problem Classes (SPCs) and problem difficulty ratings \cite{SS01},
 and the CADE ATP System Competition (CASC) \cite{Sut16}.
-StarExec \cite{SST14} and SystemOnTPTP \cite{Sut00-CADE-17} provide computational support for
+SystemOnTPTP \cite{Sut00-CADE-17} and StarExec \cite{SST14} provide computational support for
 the TPTP World.
 There are dependencies between these parts of the TPTP World, as shown in 
 Figure~\ref{Dependencies}, forming a series of "stepping stones" from key starting points
@@ -100,8 +100,6 @@ Various parts of the TPTP World have been deployed in a range of applications, i
 and industry.
 Since the first release of the TPTP problem library in 1993, many researchers have used the 
 TPTP World as an appropriate and convenient basis for ATP system research and development. 
-Over the years the TPTP World has provided a platform upon which ATP users have presented their 
-needs to ATP system developers, who have then adapted their ATP systems to the users’ needs.
 The web page {\smalltt{\url{https://www.tptp.org}}} provides access to all components.
 
 \paragraph{This paper is organized as follows:}
@@ -128,6 +126,7 @@ and non-classical forms (NTF) \cite{SF+22} have been added.
 A general principle of the TPTP language is ``we provide the syntax, you provide the semantics''.
 As such, there is no a priori commitment to any semantics for the languages, although in almost 
 all cases the intended logic and semantics are well known.
+BNF DISCUSSION
 
 The formulae of problems solutions are built from {\em annotated formulae}, 
 which have the form~\ldots \\
@@ -199,6 +198,74 @@ thf(hot_coffee,conjecture,
 The development of the TPTP World started with the TPTP problem library in mid-1992, as a 
 collaboration between Geoff Sutcliffe at the University of Western Australia (James Cook 
 University from 1993), and Christian Suttner at the Technische Universit{\"a}t M{\"u}nchen.
+
+A large number of interesting problems have accumulated over the years in the 
+ATP community. Besides publishing particularly interesting individual problems,
+from early on researchers collected problems in order to obtain
+a basis for experimentation.
+The first major publication\footnote{To our knowledge, the first circulation 
+of problems for testing ATP systems was due to Larry Wos in the late sixties.}
+in this regard was \cite{MOW76}, which provides 
+an explicit listing of clauses for 63 problems, many of which are still
+relevant today.
+In the same year \cite{WM76} documented 86 problems which have since commonly 
+been used for ATP testing. 
+The problem clauses are not supplied in \cite{WM76}, however.
+A second major thrust was provided by \cite{Pel86}, which lists 75 problems.
+Other more recent papers are \cite{BLM+86}, \cite{Qua92}, 
+\cite{MW92}, and \cite{McC93}, to name a few. 
+The Journal of Automated Reasoning's Problem Corner also provided interesting 
+challenge problems.
+Problems published in hardcopy form are, however, often not suitable for 
+testing ATP systems, because they have to be transcribed to electronic form.
+This is a cumbersome, error-prone process, and is feasible for only very
+small numbers of small problems. 
+A problem library in electronic form was made publicly available by Argonne 
+National Laboratories (in Otter format \cite{McC94}) in 1988 \cite{ANL}.
+This library has been a major source of problems for ATP researchers.
+Other electronic collections of problems are available, but have not been 
+announced officially (e.g., that distributed with the SPRFN ATP system 
+\cite{SPRFN}).
+
+Prior to the development of the TPTP a large number of interesting problems had
+accumulated in the ATP community. 
+From early on researchers published particularly interesting individual 
+problems, e.g., \cite{MOW76,Pel86-JAR,BL+86,Qua92-JAR,MW92-CADE-11,McC93}.
+Problems published in hardcopy form are, however, often not suitable for 
+testing ATP systems, because they have to be transcribed to electronic form.
+This is a cumbersome, error-prone process, and is feasible for only small 
+numbers of small problems. 
+Researchers also collected problems in electronic form, e.g., in 1988 the 
+Argonne National Laboratory produced a collection in Otter format 
+\cite{McC03-Otter}, and the SPRFN ATP system \cite{Pla88} was distributed
+with a collection of problems.
+%To the author's knowledge, the first circulation of problems for testing ATP 
+%systems was due to Larry Wos in the late sixties.
+%The first major publication in this regard was \cite{MOW76}, which provides 
+%an explicit listing of 63 CNF problems.
+%In the same year \cite{WM76} documented 86 CNF problems that were commonly 
+%used for ATP testing. 
+%The problem clauses are not supplied in \cite{WM76}, however.
+%A second major thrust was provided by \cite{Pel86-JAR}, which lists 75 FOF
+%problems.
+%Other early papers include \cite{BL+86}, \cite{Qua92-JAR}, \cite{MW92-CADE-11},
+%and \cite{McC93}.
+%The Journal of Automated Reasoning's Problem Corner also provided interesting 
+%challenge problems.
+%A problem library in electronic form was made publicly available by Argonne 
+%National Laboratories in Otter format \cite{McC03-Otter}, in 1988.
+% This library was a major source of problems for ATP researchers.
+%Other electronic collections of problems were also available, but were not 
+%announced officially, e.g., that distributed with the SPRFN ATP system 
+%\cite{Pla88}.
+
+Prior to the development of the TPTP a large number of interesting problems had
+accumulated in the ATP community, in print form, e.g., 
+\cite{MOW76,Pel86-JAR,Qua92-JAR}, and as electronic collections, e.g., the 
+Argonne National Laboratory collection \cite{McC03-Otter} and the SPRFN 
+collection \cite{Pla88}.
+
+
 The TPTP problem library is managed in the manner of a software product, in the sense that fixed 
 releases are made.
 Each release is identified by a release number in the form v$Version$.$Edition$.$Patch$:
@@ -351,6 +418,8 @@ At the time of writing this paper, the TSTP contained the results of running 87 
 system variants on all the problems in the TPTP that they could attempt
 (therefore, e.g., systems that do model finding for FOF are not run on THF problems).
 This produced 1091026 runs, of which 432718 (39.6\%) solved the problem.
+One use of the TSTP is for computing the TPTP problem difficulty ratings (see 
+Section~\ref{Ratings}).
 
 TSTP solution files have structure that mimics the TPTP problem files.
 The header section has four parts: 
@@ -539,10 +608,6 @@ tff(people,interpretation,
 \caption{Example infinite model}
 \label{ExampleModel}
 \end{figure}
-
-One use of the TSTP is for ATP system developers to examine solutions to problems and thus 
-understand how they can be solved, leading to improvements to their own systems. 
-Another use is for computing the TPTP problem ratings (see Section~\ref{Ratings}).
 
 \paragraph{Resource Limits:}
 A common question, and often a misbelief, is whether the resource limits used should be increased
@@ -822,7 +887,7 @@ Possible reasons are discussed in \cite{SK+24}.
 \end{figure}
 
 %--------------------------------------------------------------------------------------------------
-\section{StarExec and SystemOnTPTP}
+\section{SystemOnTPTP and StarExec}
 \label{StarExec}
 
 The StarExec Miami computers have an
@@ -920,14 +985,6 @@ bring the competition to its current state.
       first-order logic.
 \end{packed_itemize}
 
-Over the years the TPTP and CASC have increasingly been used as a conduit for ATP users to provide 
-samples of their problems to ATP system developers.
-Users' problems that are contributed to the TPTP are eligible for use in CASC.
-The problems are then exposed to ATP system developers, who improve their systems' performances 
-on the problems, in order to perform well in CASC.
-This completes a cycle that provides the users with more effective tools for solving their 
-problems.
-
 The first CASC was held at CADE-13 in 1996, at DIMACS in Rutgers University, USA, in collaboration
 with Christian Suttner.
 Of particular interest for this IJCAR is that CASC was conceived of in 1994 after CADE-12 in
@@ -937,6 +994,35 @@ our train departures.
 %--------------------------------------------------------------------------------------------------
 \section{TPTP World Users}
 \label{Users}
+
+Over the years the TPTP World has provided a platform upon which ATP users have presented their 
+needs to ATP system developers, who have then adapted their ATP systems to the users’ needs.
+
+One use of the TSTP is for ATP system developers to examine solutions to problems and thus 
+understand how they can be solved, leading to improvements to their own systems. 
+
+Over the years the TPTP and CASC have increasingly been used as a conduit for ATP users to provide 
+samples of their problems to ATP system developers.
+Users' problems that are contributed to the TPTP are eligible for use in CASC.
+The problems are then exposed to ATP system developers, who improve their systems' performances 
+on the problems, in order to perform well in CASC.
+This completes a cycle that provides the users with more effective tools for solving their 
+problems.
+
+Discuss people:
+\begin{packed_itemize}
+\item Christian Suttner - TPTP problem library and CASC
+\item Adam Pease and Josef Urban - Large theory problems
+\item Stephan Schulz - Technical advice
+\item Jasmin Blanchette - Sledgehammer to SystemOnTPTP, TF1
+\item Allen van Gelder - BNF and parser
+\item asmin Blanchette and Andrei Paskevich - TF1
+\item Evgeny Kotelnikov - TXF
+\item Christoph Benz{\"u}ller and Chad Brown - TH0
+\item Christoph Benz{\"u}ller and Alexander Steen - NTF
+\item Koen Claessen and Peter Baumgartner and Stephan Schulz - TF0
+\item Cezary Kaliszyk and Florian Rabe - TH1
+\end{packed_itemize}
 
 %--------------------------------------------------------------------------------------------------
 \section{Conclusion}
