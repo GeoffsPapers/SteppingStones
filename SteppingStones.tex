@@ -64,7 +64,7 @@ the Specialist Problem Classes (SPCs) used to classify problems from 2010,
 the SystemOnTPTP service that was offered from 2011, 
 and 
 the StarExec service that started in 2013. 
-This talk reviews these stepping stones in the development of the TPTP World.
+This paper reviews these stepping stones in the development of the TPTP World.
 \end{abstract}
 %--------------------------------------------------------------------------------------------------
 \section{Introduction}
@@ -82,12 +82,32 @@ and the CADE ATP System Competition (CASC) \cite{Sut16}.
 SystemOnTPTP \cite{Sut00-CADE-17} and StarExec \cite{SST14} provide computational support for
 the TPTP World.
 There are dependencies between these parts of the TPTP World, as shown in 
-Figure~\ref{Dependencies}, forming a series of "stepping stones" from key starting points
-through to happy users, who contribute to TPTP problem library.
-There is another cycle of dependencies: from the TPTP problem library, to the TSTP solution 
+Figure~\ref{Dependencies}, forming a series of "stepping stones" from TPTP standards to 
+happy users~\ldots
+\begin{packed_itemize}
+\item The TPTP language (see Section~\ref{Languages}) is used for writing problems in the TPTP
+      problem library and the TSTP solution library.
+\item The SZS ontologies (see Section~\ref{SZS}) are used to specify properties of problems
+      and solutions.
+\item The language form and SZS ontology values classify problems into Special Problem Classes
+      (see Section~\ref{SPCs}).
+\item The TPTP problem library (see Section~\ref{TPTP}) is the central collection of test problems.
+\item The TSTP solution library (see Section~\ref{TSTP}) is the central collection of solutions
+      to the TPTP library problems.
+\item The TPTP problems' difficulty ratings (see Section~\ref{Ratings}) are computed wrt each
+      SPC, using data from the TSTP.
+\item The CADE ATP System Competition (see Section~\ref{CASC}) is the annual evaluation of 
+      ATP systems - the world championship for such systems.
+\item SystemOnTPTP (see Section~\ref{StarExec}) provides online access to ATP systems and tools.
+\item The StarExec computers (see Section~\ref{StarExec}) are used to build the TSTP, and to run
+      CASC.
+\item Users of the TPTP World (see Section~\ref{Users}) provide problems for the TPTP problem
+      library, and ATP systems/tools for SystemOnTPTP and StarExec.
+\end{packed_itemize}
+There is a cycle of dependencies from the TPTP problem library, to the TSTP solution 
 library, to the problem difficulty ratings, and back to the TPTP problem library.
-This cycle means that building these components, releases of the TPTP problem library in
-particular, requires iteration until stability is reached.
+This cycle means that building these components, particularly building releases of the TPTP 
+problem library, requires iteration until stability is reached.
 
 \begin{figure}[htbp]
 \centering
@@ -123,10 +143,15 @@ typed extended first-order form (TXF)
 typed higher-order form (THF)
 \cite{SB10,KSR16}, 
 and non-classical forms (NTF) \cite{SF+22} have been added.
+The standardisation of the language received a signifcant technical boost in 2006 when the BNF
+definition was revised to a state that a parser could be automatically generated using
+{\tt lex/yacc} \cite{VS06}, and all the language forms are now quite precisely 
+specified.\footnote{%
+But note that the BNF ``syntax'' is not completely strict -- the BNF uses an extended BNF form
+that relgates details to ``semantic'' rules that do not have to be encoded in a parser.}
 A general principle of the TPTP language is ``we provide the syntax, you provide the semantics''.
 As such, there is no a priori commitment to any semantics for the languages, although in almost 
 all cases the intended logic and semantics are well known.
-BNF DISCUSSION
 
 The formulae of problems solutions are built from {\em annotated formulae}, 
 which have the form~\ldots \\
@@ -198,74 +223,13 @@ thf(hot_coffee,conjecture,
 The development of the TPTP World started with the TPTP problem library in mid-1992, as a 
 collaboration between Geoff Sutcliffe at the University of Western Australia (James Cook 
 University from 1993), and Christian Suttner at the Technische Universit{\"a}t M{\"u}nchen.
-
-A large number of interesting problems have accumulated over the years in the 
-ATP community. Besides publishing particularly interesting individual problems,
-from early on researchers collected problems in order to obtain
-a basis for experimentation.
-The first major publication\footnote{To our knowledge, the first circulation 
-of problems for testing ATP systems was due to Larry Wos in the late sixties.}
-in this regard was \cite{MOW76}, which provides 
-an explicit listing of clauses for 63 problems, many of which are still
-relevant today.
-In the same year \cite{WM76} documented 86 problems which have since commonly 
-been used for ATP testing. 
-The problem clauses are not supplied in \cite{WM76}, however.
-A second major thrust was provided by \cite{Pel86}, which lists 75 problems.
-Other more recent papers are \cite{BLM+86}, \cite{Qua92}, 
-\cite{MW92}, and \cite{McC93}, to name a few. 
-The Journal of Automated Reasoning's Problem Corner also provided interesting 
-challenge problems.
-Problems published in hardcopy form are, however, often not suitable for 
-testing ATP systems, because they have to be transcribed to electronic form.
-This is a cumbersome, error-prone process, and is feasible for only very
-small numbers of small problems. 
-A problem library in electronic form was made publicly available by Argonne 
-National Laboratories (in Otter format \cite{McC94}) in 1988 \cite{ANL}.
-This library has been a major source of problems for ATP researchers.
-Other electronic collections of problems are available, but have not been 
-announced officially (e.g., that distributed with the SPRFN ATP system 
-\cite{SPRFN}).
-
-Prior to the development of the TPTP a large number of interesting problems had
-accumulated in the ATP community. 
-From early on researchers published particularly interesting individual 
-problems, e.g., \cite{MOW76,Pel86-JAR,BL+86,Qua92-JAR,MW92-CADE-11,McC93}.
-Problems published in hardcopy form are, however, often not suitable for 
-testing ATP systems, because they have to be transcribed to electronic form.
-This is a cumbersome, error-prone process, and is feasible for only small 
-numbers of small problems. 
-Researchers also collected problems in electronic form, e.g., in 1988 the 
-Argonne National Laboratory produced a collection in Otter format 
-\cite{McC03-Otter}, and the SPRFN ATP system \cite{Pla88} was distributed
-with a collection of problems.
-%To the author's knowledge, the first circulation of problems for testing ATP 
-%systems was due to Larry Wos in the late sixties.
-%The first major publication in this regard was \cite{MOW76}, which provides 
-%an explicit listing of 63 CNF problems.
-%In the same year \cite{WM76} documented 86 CNF problems that were commonly 
-%used for ATP testing. 
-%The problem clauses are not supplied in \cite{WM76}, however.
-%A second major thrust was provided by \cite{Pel86-JAR}, which lists 75 FOF
-%problems.
-%Other early papers include \cite{BL+86}, \cite{Qua92-JAR}, \cite{MW92-CADE-11},
-%and \cite{McC93}.
-%The Journal of Automated Reasoning's Problem Corner also provided interesting 
-%challenge problems.
-%A problem library in electronic form was made publicly available by Argonne 
-%National Laboratories in Otter format \cite{McC03-Otter}, in 1988.
-% This library was a major source of problems for ATP researchers.
-%Other electronic collections of problems were also available, but were not 
-%announced officially, e.g., that distributed with the SPRFN ATP system 
-%\cite{Pla88}.
-
-Prior to the development of the TPTP a large number of interesting problems had
-accumulated in the ATP community, in print form, e.g., 
-\cite{MOW76,Pel86-JAR,Qua92-JAR}, and as electronic collections, e.g., the 
-Argonne National Laboratory collection \cite{McC03-Otter} and the SPRFN 
-collection \cite{Pla88}.
-
-
+At that time a large number of interesting problems had accumulated in the ATP community, in
+both hardcopy \cite{MOW76,WM76,Pel86-JAR,BL+86,Qua92-JAR,MW92-CADE-11} and electronic form
+\cite{ANL,SPRFN}.\footnote{To my knowledge, the first circulation of test problems was by 
+Larry Wos in the late sixties.} 
+The TPTP problem library was designed to centralize and unify these disparate collections, 
+to provide a comprehensive library of ATP test problems in a simple, unambiguous, reference 
+mechanism.
 The TPTP problem library is managed in the manner of a software product, in the sense that fixed 
 releases are made.
 Each release is identified by a release number in the form v$Version$.$Edition$.$Patch$:
@@ -280,7 +244,7 @@ scientific domains.
 Seven main fields are defined: logic, mathematics, computer science, science \& engineering, 
 social sciences, arts \& humanities, and other. 
 Each field is subdivided into domains, each identified by a three-letter mnemonic, e.g., the
-social science field has three domains: Social Choice Theory (SCT), Management (NGT), and
+social science field has three domains: Social Choice Theory (SCT), Management (MGT), and
 Geography (GEG).
 
 Table~\ref{tab:Releases} lists the versions of the TPTP up to v9.0.0, with the new feature added, 
@@ -970,28 +934,26 @@ structures), extensive testing and tuning, and an understanding of how to optimi
 The design and organization of CASC has evolved over the years to a sophisticated state.
 Decisions made for CASC (alongside the TPTP) have had an influence on the directions of 
 development in ATP.
-It is interesting to look back on some of the key decisions that have helped 
-bring the competition to its current state.
+It is interesting to look back on some of the key decisions that have helped bring the competition 
+to its current state.
 \begin{packed_itemize}
-\item CASC-13, 1996: The first CASC, with the CNF division.
-\item CASC-14, 1997: Introduced the SAT division, stimulating the development of model finding 
-      systems for CNF.
-\item CASC-15, 1998: Introduced the FOF division, starting the slow demise of CNF to becoming 
-      the ``assembly language'' of ATP. 
-\item CASC-JC, 2001: Introduced ranking based on proof output, and introduced the EPR division.
-\item CASC-21, 2007: Introduced the FNT division, further stimulating the development of model 
-      finding systems.
-\item CASC-J4, 2008: Introduced the LTB division, stimulating the development of techniques for 
-      dealing with very large axiom sets.
-\item CASC-J5, 2010: Introduced the THF division, stimulating development of ATP systems for 
-      higher-order logic.
-\item CASC-23, 2011: Introduced the TFA division, stimulating development of ATP systems for 
-      first-order logic with arithmetic.
-\item CASC-24, 2013: Removed the CNF division, confirming the demise of CNF.
-\item CASC-J7, 2014: Required use of the SZS ontology.
-\item CASC-25, 2015: Introduced the TFN division, stimulating development of model finding typed 
-      first-order logic.
+\item CASC-13, 1996: 1st CASC, with the CNF division.
+\item CASC-14, 1997: 2nd CASC, added the SAT division.
+\item CASC-15, 1998: 3rd CASC, added the FOF division.
+\item CASC-JC, 2001: 6th CASC, added the EPR division. Ranking based on proof output.
+\item CASC-21, 2007: 12th CASC, added the FNT division.
+\item CASC-J4, 2008: 13th CASC, added the LTB division.
+\item CASC-J5, 2010: 15th CASC, added the THF division.
+\item CASC-23, 2011: 16th CASC, added the TFA division.
+\item CASC-24, 2013: 18th CASC, removed the CNF division.
+\item CASC-J7, 2014: 19th CASC. Required use of the SZS ontology.
+\item CASC-25, 2015: 20th CASC, added the TFN division.
+\item CASC-26, 2017: 22nd CASC, added the SLH division.
+\item CASC-J12, 2024: 28th CASC, added the ICU division.
 \end{packed_itemize}
+In the years from CASC-26 to CASC-J12 the competition stayed quite stable, but each year
+the various divisions, evaluations, etc., were optimized (as was also the case in prior years
+when step changes also peturbed the competition design).
 
 The first CASC was held at CADE-13 in 1996, at DIMACS in Rutgers University, USA, in collaboration
 with Christian Suttner.
