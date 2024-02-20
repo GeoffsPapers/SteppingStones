@@ -120,7 +120,7 @@ Various parts of the TPTP World have been deployed in a range of applications, i
 and industry.
 Since the first release of the TPTP problem library in 1993, many researchers have used the 
 TPTP World as an appropriate and convenient basis for ATP system research and development. 
-The web page {\smalltt{\url{https://www.tptp.org}}} provides access to all components.
+The web page \href{http://www.tptp.org}{{\tt www.tptp.org}} provides access to all components.
 
 \paragraph{This paper is organized as follows:}
 
@@ -223,13 +223,23 @@ thf(hot_coffee,conjecture,
 The development of the TPTP World started with the TPTP problem library in mid-1992, as a 
 collaboration between Geoff Sutcliffe at the University of Western Australia (James Cook 
 University from 1993), and Christian Suttner at the Technische Universit{\"a}t M{\"u}nchen.
-At that time a large number of interesting problems had accumulated in the ATP community, in
+In the preceding years it had been observed that ATP system developers were testing their
+systems, and publishing results, based on small numbers of selected test problems.
+At the same time some good ideas were seen to be abandoned because they were testing on
+inappropriate selections of test problems.
+The principal motivation was thus to support testing and evaluation of ATP systems, to help 
+ensure that performance results accurately reflect capabilities of the ATP systems being 
+considered. 
+A common library of test problems is necessary for meaningful system evaluations, meaningful system 
+comparisons, repeatability of testing, and the production of statistically significant results. 
+At that time a large number of interesting test problems had accumulated in the ATP community, in
 both hardcopy \cite{MOW76,WM76,Pel86-JAR,BL+86,Qua92-JAR,MW92-CADE-11} and electronic form
 \cite{ANL,SPRFN}.\footnote{To my knowledge, the first circulation of test problems was by 
 Larry Wos in the late sixties.} 
 The TPTP problem library was designed to centralize and unify these disparate collections, 
 to provide a comprehensive library of ATP test problems in a simple, unambiguous, reference 
 mechanism.
+
 The TPTP problem library is managed in the manner of a software product, in the sense that fixed 
 releases are made.
 Each release is identified by a release number in the form v$Version$.$Edition$.$Patch$:
@@ -797,19 +807,25 @@ Each TPTP problem has a difficulty rating that provides a well-defined measure o
 the problem is for current ATP systems \cite{SS01}.
 The ratings are based on performance data in the TSTP (see Section~\ref{TSTP}), and are updated
 in each TPTP edition.
-Rating is done separately for each SPC.
-CLEANING
+The TPTP tags problems that are designed specifically to be suited or ill-suited to some ATP
+system, calculus, or control strategy as {\em biased}
+(this includes the {\tt SYN000} problems, which are designed for testing ATP systems' parsers).
+The biased problems are excluded from the calculations.
+Rating is then done separately for each SPC.
+
 First, a partial order between systems is determined according to whether or not a system 
 solves a strict superset of the problems solved by another system. 
 If a strict superset is solved, the first system is said to {\em subsume} the second. 
-% The union of the problems solved by the non-subsumed systems defines the state-of-the-art -- all 
-% the problems that are solved by any system. 
+The union of the problems solved by the non-subsumed systems defines the state-of-the-art -- all 
+the problems that are solved by any system. 
 Then the fraction of non-subsumed systems that fail on a problem is the difficulty rating 
 for the problem. 
 Problems that are solved by all of the non-subsumed systems get a rating of 0.00 (``easy'');
 problems that are solved by some of the non-subsumed systems get a rating between 
 0.00 and 1.00 (``difficult''); 
 problems that are solved by none of the non-subsumed systems get a rating of 1.00 (``unsolved'').
+As additional output, all the systems are given a rating for each SPC, computed as the
+fraction of difficult problems they can solve.
 
 The TPTP difficulty ratings of problems (that are unchanged) provide a way to assess progress 
 in the field -- as the problems are not actually getting easier decreases in the difficulty
@@ -850,22 +866,55 @@ Possible reasons are discussed in \cite{SK+24}.
 \end{minipage}
 \end{figure}
 
+
 %--------------------------------------------------------------------------------------------------
 \section{SystemOnTPTP and StarExec}
 \label{StarExec}
 
-SystemOnTPTP - data on hits in 2023.
-Main user Sledgehammer.
+Some of the early contributions to the TPTP problem library came from users working in
+disciplines other than computer science, e.g. (with a few exemplar references), in mathematics 
+\cite{Qua92-Book,MP96}, logic \cite{GO86,Jec95}, management \cite{PB+92-TR,PM94}, planning 
+\cite{SE94}, etc. 
+These users often selected the Otter ATP system \cite{McC03-Otter} for their experiments, as
+it was readily available and easy enough to install. 
+As the TPTP World evolved it was clear that more poswerful ATP systems were available, especially 
+evident in the CADE ATP System Competition (see Section~\ref{CASC}).
+However, these more poswerful system were often not as easy to obtain and install.
+In that light an NSF grant was used to obtain hardware and build the SystemOnTPTP online service,
+which allows users to submit their problems to most recent versions to a wide range of ATP
+Systems.
+SystemOnTPTP also provides recommendations of which ATP systems might be most likely to solve
+a problem, based on the SPC of the user's problem and the system ratings for the SPC
+(see Sections~\ref{SPCs} and~\ref{Ratings}), and can run the recommended systems in competition
+parallel \cite{SS99-FLAIRS}.
+The core SystemOnTPTP service was augmented by the SystemB4TPTP service that provides tools to
+prepare problems for submission in SystemOnTPTP, e.g., \cite{HV11,Sut14,KSR16} and the 
+SystemOnTSTP service that provides tools for analysing solutions output from SystemOnTPTP, 
+e.g., \cite{PGS06,Sut06,TPS07}.
+The web page 
+\href{https://www.tptp.org/cgi-bin/SystemOnTPTP}{{\tt www.tptp.org/cgi-bin/SystemOnTPTP}} 
+provides the entry point to web pages for using the services.
+While many users enjoy browser-based usage, it is also easy to use the services programmatically;
+in fact this is where most of the use comes from.
+In 2023 there were 887287 requests serviced (an average of one every 36 seconds), from 286 
+countries.
+One heavy programmatic user is the Sledgehammer component of the interactive theorem prover
+Isabelle \cite{PB10}.
 
-Grant. Iowa then Miami.
-The StarExec Miami computers have an
-octa-core Intel Xeon E5-2667 v4 CPU running at 2.10 GHz,
-128 GiB memory,
-and the CentOS Linux release 7.4.1708 operating system.
-% Linux kernel 3.10.0-1160.62.1.el7.x86\_64.
-One ATP system is run on one CPU at a time.
+The TPTP problem library was motivated (see Section~\ref{TPTP}} by the need to provide support
+for meaningful ATP system evaluation.
+This need was (or became) evident in other logic solver communities, e.g., SAT \cite{HS00-SATLIB} 
+and SMT \cite{BST10}.
+For many years testing of logic solvers was done on individual developer's computers. 
+In 2010 a proposal for centralised hardware and software support was developed, and in 2011 a 
+\$$2.11 million NSF grant was obtained.
+This grant led to the development and availability of StarExec Iowa \cite{SST14} in 2012,
+and a subsequent \$1.00 million grant in 2017 expanded StarExec to Miami.
+StarExec has been central to much progress in logic solvers over the last 10 years, supporting
+16 logic solver community, used for running many of their annual competitions \cite{BB+19},
+and supporting many many users.
 
-Number of users, jobs, job pairs in 2023.
+ZZZZZZZZ
 
 Iowa being decommissioned, Miami will run longer. New containerised StarExec with containerised
 ATP systems, all in a Kubernetes framework on AWS.
