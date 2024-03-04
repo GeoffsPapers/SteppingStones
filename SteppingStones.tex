@@ -902,9 +902,17 @@ StarExec has been central to much progress in logic solvers over the last 10 yea
 16 logic solver community, used for running many of their annual competitions~\cite{BB+19},
 and supporting many many users.
 
-ZZZZZZZZ TO BE WRITTEN ZZZZZZZZZ
-Iowa being decommissioned, Miami will run longer. New containerised StarExec with containerised
-ATP systems, all in a Kubernetes framework on AWS.
+It has recently been announced that StarExec Iowa will be decommissioned. 
+The maintainer of StarExec Iowa explained that ``the plan is to operate StarExec as usual for 
+competitions Summer 2024 and Summer 2025, and then put the system into a read-only mode for one 
+year (Summer 2025 to Summer 2026)''.
+While StarExec Miami will continue to operate while funding is available, but it will not be able
+to support the large number of logic solver communities that use the larger StarExec Iowa cluster.
+Thus in the long run it will be necessary for StarExec users to transition to new environments,
+and several plans are (at the time of writing) being discussed.
+One effort is to containerise StarExec and ATP systems from the TPTP World, with the goal of
+running in a Kubernetes framework on Amazon Web Services.
+If successful, this will allow communities and individual users to run their own StarExec.
 
 %--------------------------------------------------------------------------------------------------
 \section{The CADE ATP System Competition}
@@ -928,74 +936,66 @@ theoretical and implementation advances~\cite{Nie02-Paper}.
 It has provided a forum at which empirically successful implementation efforts are acknowledged 
 and applauded, and at the same time provides a focused meeting at which novice and experienced 
 developers exchange ideas and techniques. 
+The first CASC was held at CADE-13 in 1996, at DIMACS in Rutgers University, USA.
 The CASC web site provides access to all the details:
 \href{http://www.tptp.org/CASC/}{{\tt www.tptp.org/CASC}}.
+Of particular interest for this IJCAR is that CASC was conceived of 30 years ago in 1994 after 
+CADE-12 in Nancy, when Christian Suttner and I were sitting on a bench under a tree in 
+Parc~de~la~Pépinière burning time before our train departures.
 
-CASC is run in divisions according to problem and system characteristics. 
-The different logics and syntactic characteristics of the problems in the various divisions 
-provide different challenges for ATP systems. 
-The tasks of proving theorems and showing unsatisfiability (which can be treated similarly) are 
-quite distinct from establishing non-provability and satisfiablility (which can also be treated 
-similarly).
-Problems for CASC are taken from the TPTP problem library, and some other sources. 
+CASC is run in divisions according to problem and system characteristics, in a coarse version
+of the SPCs (see Section~\ref{SPCs}).
+Problems for CASC are taken from the TPTP problem library (see Section~\ref{TPTP}), and some 
+other sources. 
+The TPTP problem ratings (see Section~\ref{Ratings}) are used to select appropriately difficult
+problems from the TPTP problem library.
 The systems are ranked according to the number of problems solved with an acceptable proof/model 
 output.
 Ties are broken according to the average time over problems solved.
-Division winners are announced and prizes are awarded.
-In addition to the ranking criteria, three other measures are made and
-presented in the results:
-The {\em state-of-the-art (SoTA) contribution} quantifies the unique
-abilities of each system.
-The {\em efficiency measure} is a combined measure that balances the time
-taken for each problem solved against the number of problems solved.
-The {\em core usage} is the average of the ratios of CPU time to
-wall clock time used, over the problems solved.
+In addition to the ranking criteria, three other measures are made and presented in the results:
+the {\em state-of-the-art (SoTA) contribution} quantifies the unique abilities of each system;
+the {\em efficiency measure} is a combined measure that balances the time taken for each problem 
+solved against the number of problems solved;
+the {\em core usage} is the average of the ratios of CPU time to wall clock time used, over the 
+problems solved.
 
-For each CASC the division winners of the previous CASC are automatically
-entered to provide benchmarks against which progress can be judged.
-Additionally, a fixed version (initially v3.2, later v3.3) of the well known 
-Otter ATP system was entered in every CASC from 2002 to 2011, as a fixed 
-point against which progress could be judged.
-By 2011 Otter was no longer competitive, and was replaced by Prover9 2009-11A
-in 2012.
-Over all 20 CASCs so far 99 distinct ATP systems have been entered.  ZZZZ
-Almost all the ATP systems have come from academia, partially due to the
-CASC requirement that all source code must be published on the CASC web site.
+The design and organization of CASC has evolved over the years to a sophisticated state.
+In the years from CASC-26 to CASC-J12 the competition stayed quite stable, but each year
+the various divisions, evaluations, etc., were optimized (as was also the case in prior years
+when step changes also peturbed the competition design).
+The changes in the divisions reflect the changing demands and interest in different types
+of ATP problems, and decisions made for CASC (alongside the TPTP) have had an influence on 
+the directions of development in ATP.
+Over the years 11 divisions have been run~\ldots
+\begin{packed_itemize}
+\item The Clause Normal Form (CNF) division from CASC-13 in 1996 to CASC-23 in 2011.
+\item The Satisfiability (SAT) division from CASC-14 in 1997 to CASC-22 in 2009.
+\item The First-order Form (FOF) division from CASC-15 in 1998 to ... ongoing.
+\item The Effectively Propositional (EPR) division from CASC-JC in 2001 to CASC-27 in 2019.
+\item The First-order Non-theorem (FNT) division from CASC-21 in 2007 to CASC-29 in 2023.
+\item The Large Theory Batch (LTB) division from CASC-J4 in 2008 to CASC-J11 in 2022.
+\item The Typed Higher-order (THF) division from CASC-J5 in 2010 to ... ongoing.
+\item The Typed First-order with Arithmetic (TFA) division from CASC-23 in 2011 to ... ongoing.
+\item The Typed First-order Non-theorem (TFN) division from CASC-25 in 2015 to CASC-J8 in 2016,
+      revived in CASC-29 in 2003 to ... ongoing.
+\item The Sledgehammer (SLH) division from CASC-26 in 2017 to ... ongoing.
+\item The I Challenge You (ICU) division introduced for CASC-J12 in 2024.
+\end{packed_itemize}
+
+Over all 20 CASCs so far 111 distinct ATP systems have been entered.  
+For each CASC the division winners of the previous CASC are automatically entered to provide 
+benchmarks against which progress can be judged.
+% Additionally, the well known Otter system was entered in every CASC from 2002 to 2011, as a 
+% fixed point against which progress could be judged.
+% By 2011 Otter was no longer competitive, and was replaced by Prover9 2009-11A in 2012.
+% Almost all the ATP systems have come from academia, partially due to the CASC requirement that 
+% source code for the systems must be published on the CASC web site (if the source cannot be made 
+% public, the system must run the demonstration division).
 Some systems have emerged as dominant in some of the divisions, with Vampire being a well-known
 example.
 The strengths of these systems stem from four main areas:
 solid theoretical foundations, significant implementation efforts (in terms of coding and data 
 structures), extensive testing and tuning, and an understanding of how to optimize for CASC.
-
-The design and organization of CASC has evolved over the years to a sophisticated state.
-Decisions made for CASC (alongside the TPTP) have had an influence on the directions of 
-development in ATP.
-It is interesting to look back on some of the key decisions that have helped bring the competition 
-to its current state.
-\begin{packed_itemize}
-\item CASC-13, 1996: 1st CASC, with the CNF division.
-\item CASC-14, 1997: 2nd CASC, added the SAT division.
-\item CASC-15, 1998: 3rd CASC, added the FOF division.
-\item CASC-JC, 2001: 6th CASC, added the EPR division. Ranking based on proof output.
-\item CASC-21, 2007: 12th CASC, added the FNT division.
-\item CASC-J4, 2008: 13th CASC, added the LTB division.
-\item CASC-J5, 2010: 15th CASC, added the THF division.
-\item CASC-23, 2011: 16th CASC, added the TFA division.
-\item CASC-24, 2013: 18th CASC, removed the CNF division.
-\item CASC-J7, 2014: 19th CASC. Required use of the SZS ontology.
-\item CASC-25, 2015: 20th CASC, added the TFN division.
-\item CASC-26, 2017: 22nd CASC, added the SLH division.
-\item CASC-J12, 2024: 28th CASC, added the ICU division.
-\end{packed_itemize}
-In the years from CASC-26 to CASC-J12 the competition stayed quite stable, but each year
-the various divisions, evaluations, etc., were optimized (as was also the case in prior years
-when step changes also peturbed the competition design).
-
-The first CASC was held at CADE-13 in 1996, at DIMACS in Rutgers University, USA, in collaboration
-with Christian Suttner.
-Of particular interest for this IJCAR is that CASC was conceived of in 1994 after CADE-12 in
-Nancy, when we were sitting on a bench under a tree in Parc de la Pépinière, burning time before
-our train departures.
 
 %--------------------------------------------------------------------------------------------------
 \section{TPTP World Users}
@@ -1003,32 +1003,36 @@ our train departures.
 
 Over the years the TPTP World has provided a platform upon which ATP users have presented their 
 needs to ATP system developers, who have then adapted their ATP systems to the users’ needs.
-
-One use of the TSTP is for ATP system developers to examine solutions to problems and thus 
-understand how they can be solved, leading to improvements to their own systems. 
-
-Over the years the TPTP and CASC have increasingly been used as a conduit for ATP users to provide 
-samples of their problems to ATP system developers.
+% The TSTP is often used by ATP system developers to examine solutions to problems, and thus 
+% understand how they can be solved, leading to improvements to their own systems. 
+The interplay between the TPTP problem library (see Section~\ref{TPTP}) and the CADE ATP
+System Competition (see Section~\ref{CASC}) has been particularly effective as a conduit for 
+ATP users to provide samples of their problems to ATP system developers.
 Users' problems that are contributed to the TPTP are eligible for use in CASC.
 The problems are then exposed to ATP system developers, who improve their systems' performances 
 on the problems, in order to perform well in CASC.
 This completes a cycle that provides the users with more effective tools for solving their 
 problems.
 
-Discuss people:
+Many people have contributed to the TPTP World, with problems, software, advice, expertise,
+and enthusiasm. 
+I am grateful to them all, and here are just a few who have made salient contributions (ordered
+rough by date of the contributions mentioned):
 \begin{packed_itemize}
-\item Christian Suttner - TPTP problem library and CASC
-\item Adam Pease and Josef Urban - Large theory problems
-\item Stephan Schulz - Technical advice
-\item Jasmin Blanchette - Sledgehammer to SystemOnTPTP, TF1
-\item Allen van Gelder - BNF and parser
-\item asmin Blanchette and Andrei Paskevich - TF1
-\item Evgeny Kotelnikov - TXF
-\item Christoph Benz{\"u}ller and Chad Brown - TH0
-\item Christoph Benz{\"u}ller and Alexander Steen - NTF
-\item Koen Claessen and Peter Baumgartner and Stephan Schulz - TF0
-\item Cezary Kaliszyk and Florian Rabe - TH1
+\item Christian Suttner - The TPTP problem library and CASC.             % 1992
+\item Stephan Schulz - Technical advice                                  % 1996
+\item Jeff Pelletier - Early support, advice, and problem contributions. % 2001
+\item Allen van Gelder - BNF and parser                                  % 2006
+\item Adam Pease and Josef Urban - Large theory problems                 % 2010
+\item Christoph Benz{\"u}ller and Chad Brown - TH0                       % 2010
+\item Koen Claessen and Peter Baumgartner and Stephan Schulz - TF0       % 2012
+\item Jasmin Blanchette - Sledgehammer to SystemOnTPTP, TF1              % 2013
+\item Andrei Paskevich - TF1                                             % 2013
+\item Cezary Kaliszyk and Florian Rabe - TH1                             % 2016
+\item Evgeny Kotelnikov - TXF                                            % 2018
+\item Christoph Benz{\"u}ller and Alexander Steen - NTF                  % 2022
 \end{packed_itemize}
+Thank you!
 
 %--------------------------------------------------------------------------------------------------
 \section{Conclusion}
