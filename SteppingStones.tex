@@ -54,7 +54,7 @@ The TPTP World is a well established infrastructure that supports research, deve
 deployment of Automated Theorem Proving (ATP) systems.
 There have been some key developments that helped make the TPTP World a success: 
 the TPTP problem library was first released in 1993,
-the CADE ATP System Competition (CASC) was conceived after CADE-12 in Nancy in 1994, 
+the CADE ATP System Competition (CASC) was conceived after CADE-12 in 1994, 
 problem difficulty ratings were added in 1997, 
 the current TPTP language was adopted in 2003, 
 the SZS ontologies were specified in 2004, 
@@ -74,35 +74,34 @@ The TPTP World~\cite{Sut10,Sut17} (once gently referred to as the ``TPTP Jungle'
 a well established infrastructure that supports research, development, and deployment of 
 Automated Theorem Proving (ATP) systems.
 Salient components of the TPTP World are
+the TPTP languages~\cite{SS+06}, 
 the TPTP problem library~\cite{Sut09}, 
 the TSTP solution library~\cite{Sut10}, 
-the TPTP languages~\cite{SS+06}, 
 the SZS ontologies~\cite{Sut08-KEAPPA},
 the Specialist Problem Classes (SPCs) and problem difficulty ratings~\cite{SS01},
+SystemOnTPTP~\cite{Sut00-CADE-17} and StarExec~\cite{SST14},
 and the CADE ATP System Competition (CASC)~\cite{Sut16}.
-SystemOnTPTP~\cite{Sut00-CADE-17} and StarExec~\cite{SST14} provide computational support for
-the TPTP World.
 There are dependencies between these parts of the TPTP World, as shown in 
 Figure~\ref{Dependencies}, forming a series of "stepping stones" from TPTP standards to 
-happy users~\ldots
+happy users, described in the following sections of this paper~\ldots
 \begin{packed_itemize}
-\item The TPTP language (see Section~\ref{Languages}) is used for writing problems in the TPTP
+\item The TPTP language (Section~\ref{Languages}) is used for writing problems in the TPTP
       problem library and the TSTP solution library.
-\item The SZS ontologies (see Section~\ref{SZS}) are used to specify properties of problems
-      and solutions.
-\item The SPCs (see Section~\ref{SPCs}) that classify problems are based on the language form 
-      and SZS ontology values.
-\item The TPTP problem library (see Section~\ref{TPTP}) is the central collection of test problems.
-\item The TSTP solution library (see Section~\ref{TSTP}) is the central collection of solutions
+\item The TPTP problem library (Section~\ref{TPTP}) is the central collection of test problems.
+\item The TSTP solution library (Section~\ref{TSTP}) is the central collection of solutions
       to the TPTP library problems.
-\item The TPTP problems' difficulty ratings (see Section~\ref{Ratings}) are computed wrt each
-      SPC, using data from the TSTP.
-\item The CADE ATP System Competition (see Section~\ref{CASC}) is the annual evaluation of 
-      ATP systems - the world championship for such systems.
-\item SystemOnTPTP (see Section~\ref{StarExec}) provides online access to ATP systems and tools.
-\item The StarExec computers (see Section~\ref{StarExec}) are used to build the TSTP, and to run
+\item The SZS ontologies (Section~\ref{SZS}) are used to specify properties of problems
+      and solutions.
+\item The SPCs (Section~\ref{SPCs}) that classify problems are based on the language form 
+      and SZS ontology values.
+\item The TPTP problems' difficulty ratings (Section~\ref{Ratings}) are computed wrt each
+      SPC, using data from the TSTP solution library.
+\item SystemOnTPTP (Section~\ref{StarExec}) provides online access to ATP systems and tools.
+\item The StarExec computers (Section~\ref{StarExec}) are used to build the TSTP, and to run
       CASC.
-\item Users of the TPTP World (see Section~\ref{Users}) provide problems for the TPTP problem
+\item The CADE ATP System Competition (Section~\ref{CASC}) is the annual evaluation of 
+      ATP systems - the world championship for such systems.
+\item Users of the TPTP World (Section~\ref{Users}) provide problems for the TPTP problem
       library, and ATP systems/tools for SystemOnTPTP and StarExec.
 \end{packed_itemize}
 There is a cycle of dependencies from the TPTP problem library, to the TSTP solution 
@@ -123,7 +122,14 @@ Since the first release of the TPTP problem library in 1993, many researchers ha
 TPTP World as an appropriate and convenient basis for ATP system research and development. 
 The web page \href{http://www.tptp.org}{{\tt www.tptp.org}} provides access to all components.
 
-\paragraph{This paper is organized as follows:}
+% This paper is organized as follows:
+% Section~\ref{Languages} provides an overview of the TPTP languages,
+% which are used for building the TPTP problem library described in Section~\ref{TPTP} and
+% the TSTP solution library described in Section~\ref{TSTP}.
+% The libraries use the SZS ontologies decribed in Section~\ref{SZS}, and the Specialist Problem
+% Classes (SPCs) described in Section~\ref{SPCs}.
+% The TSTP solution library and the SPCs provide the data for computing problem difficulty ratings,
+% described in Section~\ref{Ratings}.
 
 %--------------------------------------------------------------------------------------------------
 \section{The TPTP Languages}
