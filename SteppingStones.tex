@@ -52,7 +52,7 @@
 \begin{abstract}
 The TPTP World is a well established infrastructure that supports research, development, and 
 deployment of Automated Theorem Proving (ATP) systems.
-There have been some key developments that helped make the TPTP World a success: 
+There are key components that help make the TPTP World a success: 
 the TPTP problem library was first released in 1993,
 the CADE ATP System Competition (CASC) was conceived after CADE-12 in 1994, 
 problem difficulty ratings were added in 1997, 
@@ -384,7 +384,7 @@ This produced 1091026 runs, of which 432718 (39.6\%) solved the problem.
 One use of the TSTP is for computing the TPTP problem difficulty ratings (see 
 Section~\ref{Ratings}).
 
-TSTP solution files have a header section and annotated formulue.
+TSTP solution files have a header section and annotated formulae.
 The header section has four parts, as shown in Figure~\ref{ExampleDerivationHeader}:
 the first part identifies the ATP system, the problem, and the system's runtime parameters; 
 the second part provides information about the hardware, operating system, and resource limits; 
@@ -512,10 +512,9 @@ For interpretations (typically models) the annotated formulae are used to descri
 and symbol mappings of Tarskian interpretations, or the formulae that induce Herbrand models.
 A TPTP format for interpretations with finite domains was previously defined~\cite{SS+06}, 
 and has served the ATP community adequately for almost 20 years. 
-Recently the need for a format for interpretations with infinite domains, and for a format for 
-Kripke interpretations, has led to the development of a new TPTP format for interpretations
-\cite{SSP24}.
-Figure~\ref{ExampleModel} shows the problem formulae and a model that uses intergers as the domain.
+Recently the need to represent interpretations with infinite domains, and Kripke interpretations, 
+has led to the development of a new TPTP format that supports these interpretations~\cite{SSP24}.
+Figure~\ref{ExampleModel} shows the problem formulae and a model that uses integers as the domain.
 Please read~\cite{SSP24} for lots more details!
 
 \begin{figure}[htb]
@@ -612,17 +611,17 @@ The performance data in the TSTP is produced with adequate resource limits.
 The SZS ontologies~\cite{Sut08-KEAPPA} (named ``SZS'' after the authors of the first presentation 
 of the ontologies~\cite{SZS03}) provide values to specify the logical status of problems and
 solutions, and to describe logical data.
-The Success ontology provides values for the logical status of a conjecture ``C'' with respect to a 
-set of axioms ``Ax'', e.g., a TPTP problem whose conjecture is a logical consequence of the axioms 
+The Success ontology provides values for the logical status of a conjecture with respect to a 
+set of axioms, e.g., a TPTP problem whose conjecture is a logical consequence of the axioms 
 is tagged as a {\tt Theorem} (as in Figure~\ref{ExampleHeader}), and a model finder that 
 establishes that a set of axioms (with no conjecture) is consistent should report 
 {\tt Satisfiable}.
-The Success ontology is also used to specify the semantic relationship between the parents ``Ax''
-and inferred formulae ``C'' of an inference, as done in the TPTP format for derivations (see 
-Section~\ref{TSTP}).
+The Success ontology is also used to specify the semantic relationship between the parent 
+``axioms'' and inferred ``conjecture'' of an inference, as done in the TPTP format for 
+derivations (see Section~\ref{TSTP}).
 The NoSuccess ontology provides reasons why an ATP system/tool has failed, e.g., an ATP system 
 might report {\tt Timeout}.
-The Dataform ontology provides values for describing the form of logical data, as might be output 
+The Dataform ontology provides values for describing logical data, as might be output 
 from an ATP system/tool, e.g., a model finder might output a {\tt FiniteModel}.
 Figure~\ref{SZSExtract} shows some of the salient nodes of the ontologies.
 Their expanded names and their (abbreviated) definitions are listed in Figure~\ref{SZSTable}.
@@ -641,19 +640,22 @@ Their expanded names and their (abbreviated) definitions are listed in Figure~\r
 {\tt SUC} & {\tt Success}             & 
 The logical data has been processed successfully. \\
 {\tt ESA} & {\tt Equisatisfiable}     & 
-There exists a model of Ax iff there exists a model of C.\\
+There exists a model of the axioms iff there exists a \\
+          &                           & model of the conjecture.\\
 {\tt SAT} & {\tt Satisfiable}         & 
-Some interpretations are models of Ax.\\
+Some interpretations are models of the axioms.\\
 {\tt THM} & {\tt Theorem}             & 
-All models of Ax are models of C.\\
+All models of the axioms are models of the conjecture.\\
 {\tt CTH} & {\tt CounterTheorem}      & 
-All models of Ax are models of ~C.\\
+All models of the axioms are models of the negated \\
+          &                           & conjecture.\\
 {\tt CAX} & {\tt ContradictoryAxioms} & 
-No interpretations are models of Ax.\\
+No interpretations are models of the axioms.\\
 {\tt CSA} & {\tt CounterSatisfiable}  & 
-Some models of Ax are models of {\raisebox{0.4ex}{\texttildelow}}C.\\
+Some models of the axioms are models of the negated \\
+          &                           & conjecture.\\
 {\tt UNS} & {\tt Unsatisfiable}       & 
-All interpretations are models of {\raisebox{0.4ex}{\texttildelow}}Ax.\\
+All interpretations are models of the negated set of axioms.\\
 \hline
 {\tt NOS} & {\tt NoSuccess}           & 
 The logical data has not been processed successfully. \\
@@ -689,6 +691,7 @@ in ATP system output, in order to facilitate easy processing.
 For example, if an ATP system has established that a conjecture is not a theorem of the axioms,
 by finding a finite countermodel of the axioms and negated conjecture, the SZS format output 
 would be (see Section~\ref{TSTP} for the format of the annotated formulae)~\ldots \\
+
 \begin{minipage}{\textwidth}
 \begin{verbatim}
     % SZS status CounterSatisfiable
@@ -704,8 +707,9 @@ would be (see Section~\ref{TSTP} for the format of the annotated formulae)~\ldot
 \section{Specialist Problem Classes}
 \label{SPCs}
 
-The problems in the TPTP problem library are divided into Specialist Problem Classes (SPCs) -- 
-classes of problems with the same recognizable logical, language, and syntactic characteristics.
+The TPTP problem library is divided into Specialist Problem Classes (SPCs) -- classes of problems 
+with the same recognizable logical, language, and syntactic characteristics that make the
+problems in each SPC homogeneous wrt ATP systems.
 % SPCs added in v4.1.0 15/06/10
 Evaluation of ATP systems within SPCs makes it possible to say which systems work well for what 
 types of problems. 
@@ -714,9 +718,9 @@ SPCs for which ATP systems have distinguishable behaviour, and at which further 
 would unnecessarily split SPCs for which ATP systems have reasonably homogeneous behaviour.
 Empirically, homogeneity is ensured by examining the patterns of system performance across the 
 problems in each SPC. 
-For example, the separation of ``essentially propositional'' problems was motivated by observing 
-that SPASS~\cite{WA+99} performed differently on the ALC problems in the SYN domain of the TPTP.
-A data-driven test of homogeneity is also possible~\cite{FS02}.
+The SPCs for essentially propositional problems were motivated by the observation that 
+SPASS~\cite{WA+99} performed differently on the ALC problems in the SYN domain of the TPTP.
+A data-driven test for homogeneity is also possible~\cite{FS02}.
 
 The characteristics currently used to define the SPCs in the TPTP are shown in 
 Figure~\ref{SPCCharacteristics}.
@@ -790,13 +794,14 @@ The SPCs are used when computing the TPTP problems difficulty ratings (see Secti
 
 Each TPTP problem has a difficulty rating that provides a well-defined measure of how difficult 
 the problem is for current ATP systems~\cite{SS01}.
-The ratings are based on performance data in the TSTP (see Section~\ref{TSTP}), and are updated
-in each TPTP edition.
+The ratings are based on performance data in the TSTP solution library (see Section~\ref{TSTP}), 
+and are updated in each TPTP edition.
+
 The TPTP tags problems that are designed specifically to be suited or ill-suited to some ATP
 system, calculus, or control strategy as {\em biased}
 (this includes the {\tt SYN000} problems, which are designed for testing ATP systems' parsers).
 The biased problems are excluded from the calculations.
-Rating is then done separately for each SPC.
+Rating is then done separately for each SPC (see Section~\ref{SPCs}).
 
 First, a partial order between systems is determined according to whether or not a system 
 solves a strict superset of the problems solved by another system. 
@@ -805,14 +810,14 @@ The union of the problems solved by the non-subsumed systems defines the state-o
 the problems that are solved by any system. 
 The fraction of non-subsumed systems that fail on a problem is the difficulty rating 
 for the problem:
-problems that are solved by all of the non-subsumed systems get a rating of 0.00 (``easy'');
-problems that are solved by some of the non-subsumed systems get a rating between 
-0.00 and 1.00 (``difficult''); 
-problems that are solved by none of the non-subsumed systems get a rating of 1.00 (``unsolved'').
+problems that are solved by all of the non-subsumed systems get a rating of 0.00 (easy);
+problems that are solved by some of the non-subsumed systems get a rating between 0.00 and 1.00 
+(difficult); 
+problems that are solved by none of the non-subsumed systems get a rating of 1.00 (unsolved).
 As additional output, the systems are given a rating for each SPC -- the fraction of difficult 
 problems they can solve.
 
-The TPTP difficulty ratings provide a way to assess progress in the field -- as problem that 
+The TPTP difficulty ratings provide a way to assess progress in the field -- as problems that 
 are unchanged are not actually getting easier, decreases in their difficulty ratings are evidence 
 of progress in ATP systems.
 Figures~\ref{Ratings_v5.0.0_v6.4.0} and~\ref{Ratings_v6.3.0_v8.2.0} plot the average difficulty
@@ -820,11 +825,11 @@ ratings overall and for each of the four language forms in the TPTP World (after
 data cleaning).
 Figure~\ref{Ratings_v5.0.0_v6.4.0} is taken from~\cite{Sut17}, published in 2017.
 It plots the average ratings for the 14527 problems that had been unchanged and whose ratings 
-had not been stuck at 0.00 or 1.00, from v5.0.0 that was released in 2010 to v6.4.0 that was
+had not been stuck at 0.00 or 1.00, from TPTP v5.0.0 that was released in 2010 to v6.4.0 that was
 released in 2016. 
 Figure~\ref{Ratings_v6.3.0_v8.2.0} is taken from~\cite{SK+24}, published in 2024.
 It plots the average ratings for the 16236 problems that had been unchanged and whose ratings 
-had not been stuck at 0.00 or 1.00, from v6.3.0 that was released in 2016 to v8.2.0 that was
+had not been stuck at 0.00 or 1.00, from TPTP v6.3.0 that was released in 2016 to v8.2.0 that was
 released in 2023. 
 The two figures’ plots dovetail quite well, which gives confidence that they really are 
 comparable (there are some minor differences caused by slightly different different data cleaning 
@@ -859,32 +864,29 @@ Possible reasons are discussed in~\cite{SK+24}.
 Some of the early users of the TPTP problem library (see Section~\ref{TPTP}) were working in
 disciplines other than computer science, e.g. (with a few exemplar references), in mathematics 
 \cite{Qua92-Book,MP96}, logic~\cite{GO86,Jec95}, management~\cite{PB+92-TR,PM94}, planning 
-\cite{SE94}, etc. 
-These users often selected the Otter ATP system~\cite{McC03-Otter} for their experiments, as
+\cite{SE94}.
+These users often selected the Otter system~\cite{McC03-Otter} for their experiments, as
 it was readily available and easy enough to install. 
 As the TPTP World evolved it was clear that more powerful ATP systems were available, especially 
 evident in the CADE ATP System Competition (see Section~\ref{CASC}).
 However, these more powerful systems were often not as easy to obtain and install.
-In order to make use of ATP easier for non-geek users, an NSF grant was obtained\footnote{%
+In order to make the use of ATP easier for non-geek users, an NSF grant was obtained\footnote{%
 NSF Award 1405674} to build the SystemOnTPTP online service, which provides hardware and a web 
 interface for users to submit their problems to most recent versions of a wide range of ATP 
 systems.
-SystemOnTPTP also provides recommendations for ATP systems that might be most likely to solve
+SystemOnTPTP can provide recommendations for ATP systems that might be most likely to solve
 a problem, based on the SPC of the user's problem and the system ratings for the SPC
 (see Sections~\ref{SPCs} and~\ref{Ratings}). 
-SystemOnTPTP can run ATP systems (e.g., the recommended systems) in competition
+SystemOnTPTP can also run ATP systems (e.g., the recommended systems) in competition
 parallel~\cite{SS99-FLAIRS}.
-The core SystemOnTPTP service is supported by the SystemB4TPTP service that provides tools to
-prepare problems for submission to ATP systems, e.g., axiom selection~\cite{HV11}, a scripting
-language~\cite{Sut14}, type checking~\cite{KSR16}, and the SystemOnTSTP service that provides 
-tools for analysing solutions output from SystemOnTPTP, 
-e.g., identification of interesting lemmas in a proof~\cite{PGS06}, proof checking~\cite{Sut06},
-interactive viewing of derivations~\cite{TPS07}.
-The web page 
-\href{https://www.tptp.org/cgi-bin/SystemOnTPTP}{{\tt www.tptp.org/cgi-bin/SystemOnTPTP}} 
-provides the entry point to web pages for interactive use of the services.
-While many users enjoy interactive browser-based usage, it is also easy to use the services 
-programmatically; in fact this is where most of the use comes from.
+The core SystemOnTPTP service is supported by (i)~the SystemB4TPTP service that provides tools to
+prepare problems for submission to ATP systems, e.g., axiom selection~\cite{HV11}, type 
+checking~\cite{KSR16}, a scripting language~\cite{Sut14}, and (ii)~the SystemOnTSTP service that 
+provides tools for analysing solutions output from SystemOnTPTP, 
+e.g., interactive viewing of derivations~\cite{TPS07}, proof checking~\cite{Sut06}, identification 
+of interesting lemmas in a proof~\cite{PGS06}.
+While many users enjoy interactive use of the services in a web browser, it is also easy to use 
+the services programmatically -- in fact this is where most of the use comes from.
 In 2023 there were 887287 requests serviced (an average of one every 36 seconds), from 286 
 countries.
 One heavy programmatic user is the Sledgehammer component of the interactive theorem prover
@@ -892,8 +894,8 @@ Isabelle~\cite{PB10}.
 
 The TPTP problem library was motivated (see Section~\ref{TPTP}) by the need to provide support
 for meaningful ATP system evaluation.
-This need was (or became) evident in other logic solver communities, e.g., SAT~\cite{HS00-SATLIB} 
-and SMT~\cite{BST10}.
+This need was also (or became) evident in other logic solver communities, e.g., 
+SAT~\cite{HS00-SATLIB} and SMT~\cite{BST10}.
 For many years testing of logic solvers was done on individual developer's computers. 
 In 2010 a proposal for centralised hardware and software support was developed,
 and in 2011 a \$2.11 million NSF grant\footnote{%
@@ -903,16 +905,16 @@ This grant led to the development and availability of StarExec Iowa~\cite{SST14}
 and a subsequent \$1.00 million grant\footnote{%
 NSF Award 1730419} in 2017 expanded StarExec to Miami.
 StarExec has been central to much progress in logic solvers over the last 10 years, supporting
-16 logic solver community, used for running many of their annual competitions~\cite{BB+19},
-and supporting many many users.
+16 logic solver communities, used for running many annual competitions~\cite{BB+19}, and 
+supporting many many users.
 
-It has recently been announced that StarExec Iowa will be decommissioned. 
+It was recently announced that StarExec Iowa will be decommissioned. 
 The maintainer of StarExec Iowa explained that ``the plan is to operate StarExec as usual for 
 competitions Summer 2024 and Summer 2025, and then put the system into a read-only mode for one 
 year (Summer 2025 to Summer 2026)''.
 While StarExec Miami will continue to operate while funding is available, but it will not be able
 to support the large number of logic solver communities that use the larger StarExec Iowa cluster.
-Thus in the long run it will be necessary for StarExec users to transition to new environments,
+In the long run it will be necessary for StarExec users to transition to new environments,
 and several plans are (at the time of writing) being discussed.
 One effort is to containerise StarExec and ATP systems from the TPTP World, with the goal of
 running in a Kubernetes framework on Amazon Web Services.
@@ -956,20 +958,20 @@ problems from the TPTP problem library.
 The systems are ranked according to the number of problems solved with an acceptable proof/model 
 output.
 Ties are broken according to the average time over problems solved.
-In addition to the ranking criteria, three other measures are made and presented in the results:
-the {\em state-of-the-art (SoTA) contribution} quantifies the unique abilities of each system;
-the {\em efficiency measure} is a combined measure that balances the time taken for each problem 
-solved against the number of problems solved;
-the {\em core usage} is the average of the ratios of CPU time to wall clock time used, over the 
-problems solved.
+% In addition to the ranking criteria, three other measures are made and presented in the results:
+% the {\em state-of-the-art (SoTA) contribution} quantifies the unique abilities of each system;
+% the {\em efficiency measure} is a combined measure that balances the time taken for each problem 
+% solved against the number of problems solved;
+% the {\em core usage} is the average of the ratios of CPU time to wall clock time used, over the 
+% problems solved.
 
 The design and organization of CASC has evolved over the years to a sophisticated state.
-In the years from CASC-26 to CASC-J12 the competition stayed quite stable, but each year
-the various divisions, evaluations, etc., were optimized (as was also the case in prior years
-when step changes also peturbed the competition design).
+In the years from CASC-26 in 2017 to CASC-29 in 2023 the competition stayed quite stable, but 
+each year the various divisions, evaluations, etc., were optimized (as was also the case in 
+prior years when step changes also perturbed the competition design).
 The changes in the divisions reflect the changing demands and interest in different types
-of ATP problems, and decisions made for CASC (alongside the TPTP) have had an influence on 
-the directions of development in ATP.
+of ATP problems, and decisions made for CASC (in the context of the TPTP World) have had an 
+influence on the directions of development in ATP.
 Over the years 11 divisions have been run~\ldots
 \begin{packed_itemize}
 \item The Clause Normal Form (CNF) division from CASC-13 in 1996 to CASC-23 in 2011.
@@ -986,7 +988,7 @@ Over the years 11 divisions have been run~\ldots
 \item The I Challenge You (ICU) division introduced for CASC-J12 in 2024.
 \end{packed_itemize}
 
-Over all 20 CASCs so far 111 distinct ATP systems have been entered.  
+In the 20 CASCs so far 111 distinct ATP systems have been entered.  
 For each CASC the division winners of the previous CASC are automatically entered to provide 
 benchmarks against which progress can be judged.
 % Additionally, the well known Otter system was entered in every CASC from 2002 to 2011, as a 
@@ -1026,18 +1028,18 @@ and here are just a few who have made salient contributions (ordered roughly by 
 contributions mentioned):
 \begin{packed_itemize}
 \item Christian Suttner - The TPTP problem library and CASC.                 % 1992
-\item Jeff Pelletier - Early support, thoughtful advice, problem contributions. % 2001
-\item Stephan Schulz - Technical advice                                      % 1996
-\item Andrei Voronkov and the Vampire Team - Enthusiasm and constructive feedback  % 2000
-\item Allen van Gelder - The TPTP language BNF and parser                    % 2006
-\item Adam Pease and Josef Urban - Large theory problems                     % 2010
-\item Christoph Benz{\"u}ller and Chad Brown - The TH0 language              % 2010
-\item Koen Claessen and Peter Baumgartner and Stephan Schulz - The TF0 language % 2012
-\item Jasmin Blanchette - Sledgehammer to SystemOnTPTP, the TF1 language     % 2013
-\item Andrei Paskevich - The TF1 language                                    % 2013
-\item Cezary Kaliszyk and Florian Rabe - The TH1 language                    % 2016
-\item Evgeny Kotelnikov - The TXF language                                   % 2018
-\item Christoph Benz{\"u}ller and Alexander Steen - The NTF language         % 2022
+\item Jeff Pelletier - Early support and thoughtful advice, problem contributions. % 2001
+\item Stephan Schulz - Technical expertise.                                      % 1996
+\item Andrei Voronkov and the Vampire Team - Enthusiasm and constructive feedback.  % 2000
+\item Allen van Gelder - The TPTP language BNF and parser.                    % 2006
+\item Adam Pease and Josef Urban - Large theory problems.                     % 2010
+\item Christoph Benz{\"u}ller and Chad Brown - The TH0 language.              % 2010
+\item Koen Claessen and Peter Baumgartner and Stephan Schulz - The TF0 language. % 2012
+\item Jasmin Blanchette - Linking Sledgehammer to SystemOnTPTP, the TF1 language.     % 2013
+\item Andrei Paskevich - The TF1 language.                                    % 2013
+\item Cezary Kaliszyk and Florian Rabe - The TH1 language.                    % 2016
+\item Evgeny Kotelnikov - The TXF language.                                   % 2018
+\item Christoph Benz{\"u}ller and Alexander Steen - The NTF language.         % 2022
 \end{packed_itemize}
 Thank you!
 
@@ -1045,9 +1047,14 @@ Thank you!
 \section{Conclusion}
 \label{Conclusion}
 
-This paper 
+This paper has described key components of the TPTP World that help make it a success,
+linking them together as ``stepping stones'' that lead from one component to another.
+The large number of citations to work of others, and explicitly Section~\ref{Users}, 
+illustrate how the TPTP World has benefited and benefited from users in the ATP community.
+I am also grateful to the many people who have donated hard cash to the project, helping
+to keep it alive!
 
-This section has naturally focused on the successful parts of the TPTP history.
+This paper has naturally focused on the successful parts of the TPTP World.
 There have also been some failed developments and suboptimal (in retrospect) decisions \frownie{}.
 For example, in 2015 there was an attempt to develop a description logic form for the TPTP 
 language. 
@@ -1062,13 +1069,20 @@ This has been overcome by creating multiple domain directories where necessary, 
 to be done again, six or eight digit problem numbers shared across all domains would be an 
 improvement.
 
-Currently this work is being extended to 
+The maintenance and development of the TPTP World is ongoing work.
+The most recent development is the languages and support for non-classical logics, initially
+modal logic~\cite{SF+22,SS24}.
+The new format for representing interpretations (see Section~\ref{TSTP}) will be promulgated in 
+the near future.
+As always, the ongoing success and utility of the TPTP problem library depends on ongoing 
+contributions of problems -- the automated reasoning community is encouraged to continue making 
+contributions of all types of problems.
 
-None of this would have happened without the early strategic insights of Christian Suttner,
+The TPTP World would not exist without the early strategic insights of Christian Suttner,
 with his willingness to let me do the organization without interference. 
 Maybe his most wonderful contribution (which took him over two hours to produce when he
 was visiting me at James Cook University -- I think he took a nap \smiley) is his 
-plain-language definition of automated theorem proving: 
+wonderfully simple plain-language definition of automated theorem proving: 
 ``the derivation of conclusions that follow inevitably from known facts''.
 
 %--------------------------------------------------------------------------------------------------
