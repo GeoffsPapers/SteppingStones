@@ -154,7 +154,7 @@ definition was revised so that all the language forms are quite precisely specif
 But note that the BNF ``syntax'' is not completely strict -- the BNF uses an extended BNF form
 that relegates details to ``strict'' rules that do not have to be checked by a parser.}
 As a result a parser can be generated using {\tt lex/yacc}~\cite{VS06}.
-A general principle of the TPTP language is ``we provide the syntax, you provide the semantics''.
+A general principle of the TPTP language is: ``we provide the syntax, you provide the semantics''.
 As such, there is no a priori commitment to any semantics for each of the language forms, 
 although in almost all cases the intended logic and semantics are well known.
 
@@ -237,18 +237,18 @@ At the same time some good ideas were seen to be abandoned because they had been
 inappropriate selections of test problems.
 These observations motivated us to start collecting ATP test problems into what became the TPTP 
 problem library.
-A comprehensive library of test problems, in a simple, unambiguous, reference mechanism, is 
-necessary for meaningful system evaluations, meaningful system comparisons, repeatability of 
-testing, and the production of statistically significant results. 
+A comprehensive library of test problems is necessary for meaningful system evaluations, 
+meaningful system comparisons, repeatability of testing, and the production of statistically 
+significant results. 
 The goal was to support testing and evaluation of ATP systems, to help ensure that performance 
 results accurately reflect the capabilities of the ATP systems being considered. 
 
 Releases of the TPTP problem library are identified by numbers in the form 
-v$Version$.$Edition$.$Patch$:
-the $Version$ enumerates major new releases of the TPTP in which important new features have 
-been added,
-the $Edition$ is incremented each time new problems are added to the current version, and
-the $Patch$ level is incremented each time errors found in the current edition are corrected. 
+v$Version$.$Edition$.$Patch$.
+The $Version$ enumerates major new releases of the TPTP in which important new features have 
+been added.
+The $Edition$ is incremented each time new problems are added to the current version.
+The $Patch$ level is incremented each time errors found in the current edition are corrected. 
 The first release of the TPTP problem library, v1.0.0 was made on Friday 12th November 1993. 
 
 The problems in the library are classified into {\em domains} that reflect a natural hierarchy,
@@ -297,11 +297,11 @@ v9.0.0  & ??/07/24 & NTF (non-classical typed first-order)~\cite{SF+22}   &     
 % optional digits for the problem size, and a problem version number.
 Each TPTP problem file has three parts: a header, optional includes, and annotated formulae.
 The header section contains information for users, formatted as comments in four parts, as shown
-Figures~\ref{ExampleHeader}:
-the first part identifies and describes the problem;
+in Figure~\ref{ExampleHeader}.
+The first part identifies and describes the problem,
 the second part provides information about occurrences of the problem
-in the literature and elsewhere;
-the third part provides semantic and syntactic characteristics of the problem;
+in the literature and elsewhere,
+the third part provides semantic and syntactic characteristics of the problem, and
 the last part contains comments and bugfix information.
 The header fields are self-explanatory, but of particular interest are the {\tt Status} field 
 that is explained in Section~\ref{SZS}, the {\tt Rating} field that is explained in 
@@ -363,7 +363,7 @@ include('Axioms/DAT001_0.ax').
 \section{The TSTP Solution Library}
 \label{TSTP}
 
-The complement of the TPTP problem library is the TSTP solution library~\cite{Sut07-CSR,Sut10}.
+The complement to the TPTP problem library is the TSTP solution library~\cite{Sut07-CSR,Sut10}.
 The TSTP is built by running all the ATP systems that are available in the TPTP World on
 all the problems in the TPTP problem library.
 The TSTP started being built around 2005, using solutions provided by individual system developers.
@@ -395,7 +395,7 @@ The solution follows in annotated formulae.
 For derivations, where formulae are derived from parent formulae, e.g., in proofs, refutations, 
 etc., the {\em source} fields of the annotated formulae are used to capture parent-derived 
 formulae relationships in the derivation DAG.
-This includes source of the formula -- either the problem file or an inference.
+This includes the source of the formula -- either the problem file or an inference.
 Inference data includes the name of the inference rule used, the semantic relationship between 
 the parents and the derived formula as an SZS ontology value (see Section~\ref{SZS}), and a 
 list of the parent annotated formulae names.
@@ -690,7 +690,7 @@ The SZS standard also specifies the precise way in which the ontology values sho
 in ATP system output, in order to facilitate easy processing.
 For example, if an ATP system has established that a conjecture is not a theorem of the axioms,
 by finding a finite countermodel of the axioms and negated conjecture, the SZS format output 
-would be (see Section~\ref{TSTP} for the format of the annotated formulae)~\ldots \\
+would be (see Section~\ref{TSTP} for the format of the annotated formulae): \\
 
 \begin{minipage}{\textwidth}
 \begin{verbatim}
@@ -832,7 +832,7 @@ It plots the average ratings for the 16236 problems that had been unchanged and 
 had not been stuck at 0.00 or 1.00, from TPTP v6.3.0 that was released in 2016 to v8.2.0 that was
 released in 2023. 
 The two figures’ plots dovetail quite well, which gives confidence that they really are 
-comparable (there are some minor differences caused by slightly different different data cleaning 
+comparable (there are some minor differences caused by slightly different data cleaning 
 and by recent refinements to the difficulty rating calculations). 
 The older plots show a quite clear downward trend both overall and for the four language forms, 
 while the new plots do not. 
@@ -862,7 +862,7 @@ Possible reasons are discussed in~\cite{SK+24}.
 \label{StarExec}
 
 Some of the early users of the TPTP problem library (see Section~\ref{TPTP}) were working in
-disciplines other than computer science, e.g. (with a few exemplar references), in mathematics 
+disciplines other than computer science, e.g. (with a few exemplar references), mathematics 
 \cite{Qua92-Book,MP96}, logic~\cite{GO86,Jec95}, management~\cite{PB+92-TR,PM94}, planning 
 \cite{SE94}.
 These users often selected the Otter system~\cite{McC03-Otter} for their experiments, as
@@ -895,7 +895,7 @@ Isabelle~\cite{PB10}.
 The TPTP problem library was motivated (see Section~\ref{TPTP}) by the need to provide support
 for meaningful ATP system evaluation.
 This need was also (or became) evident in other logic solver communities, e.g., 
-SAT~\cite{HS00-SATLIB} and SMT~\cite{BST10}.
+SAT~\cite{HS00-SATLIB} and SMT~\cite{CSW15}.
 For many years testing of logic solvers was done on individual developer's computers. 
 In 2010 a proposal for centralised hardware and software support was developed,
 and in 2011 a \$2.11 million NSF grant\footnote{%
@@ -912,7 +912,7 @@ It was recently announced that StarExec Iowa will be decommissioned.
 The maintainer of StarExec Iowa explained that ``the plan is to operate StarExec as usual for 
 competitions Summer 2024 and Summer 2025, and then put the system into a read-only mode for one 
 year (Summer 2025 to Summer 2026)''.
-While StarExec Miami will continue to operate while funding is available, but it will not be able
+While StarExec Miami will continue to operate while funding is available, it will not be able
 to support the large number of logic solver communities that use the larger StarExec Iowa cluster.
 In the long run it will be necessary for StarExec users to transition to new environments,
 and several plans are (at the time of writing) being discussed.
@@ -945,9 +945,9 @@ developers exchange ideas and techniques.
 The first CASC was held at CADE-13 in 1996, at DIMACS in Rutgers University, USA.
 The CASC web site provides access to all the details:
 \href{http://www.tptp.org/CASC/}{{\tt www.tptp.org/CASC}}.
-Of particular interest for this IJCAR is that CASC was conceived of 30 years ago in 1994 after 
+Of particular interest for this IJCAR is that CASC was conceived 30 years ago in 1994 after 
 CADE-12 in Nancy, when Christian Suttner and I were sitting on a bench under a tree in 
-Parc~de~la~Pépinière burning time before our train departures.
+Parc~de~la~Pépinière, burning time before our train departures.
 
 CASC is run in divisions according to problem and system characteristics, in a coarse version
 of the SPCs (see Section~\ref{SPCs}).
@@ -968,7 +968,7 @@ Ties are broken according to the average time over problems solved.
 The design and organization of CASC has evolved over the years to a sophisticated state.
 In the years from CASC-26 in 2017 to CASC-29 in 2023 the competition stayed quite stable, but 
 each year the various divisions, evaluations, etc., were optimized (as was also the case in 
-prior years when step changes also perturbed the competition design).
+prior years when there were also larger changes in the competition design).
 The changes in the divisions reflect the changing demands and interest in different types
 of ATP problems, and decisions made for CASC (in the context of the TPTP World) have had an 
 influence on the directions of development in ATP.
@@ -1034,7 +1034,7 @@ contributions mentioned):
 \item Allen van Gelder - The TPTP language BNF and parser.                    % 2006
 \item Adam Pease and Josef Urban - Large theory problems.                     % 2010
 \item Christoph Benz{\"u}ller and Chad Brown - The TH0 language.              % 2010
-\item Koen Claessen and Peter Baumgartner and Stephan Schulz - The TF0 language. % 2012
+\item Koen Claessen, Peter Baumgartner, and Stephan Schulz - The TF0 language. % 2012
 \item Jasmin Blanchette - Linking Sledgehammer to SystemOnTPTP, the TF1 language.     % 2013
 \item Andrei Paskevich - The TF1 language.                                    % 2013
 \item Cezary Kaliszyk and Florian Rabe - The TH1 language.                    % 2016
@@ -1050,7 +1050,7 @@ Thank you!
 This paper has described key components of the TPTP World that help make it a success,
 linking them together as ``stepping stones'' that lead from one component to another.
 The large number of citations to work of others, and explicitly Section~\ref{Users}, 
-illustrate how the TPTP World has benefited and benefited from users in the ATP community.
+illustrate how the TPTP World has benefited, and benefited from, users in the ATP community.
 I am also grateful to the many people who have donated hard cash to the project, helping
 to keep it alive!
 
